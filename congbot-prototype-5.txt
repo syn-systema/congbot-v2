@@ -1,0 +1,3353 @@
+# LEASE DROP - CRUDE OIL INQUIRY
+
+# Constraints: **IMPORTANT**
+
+Step1:
+
+- The python agent MUST ALWAYS first navigate to: "https://mycpa.cpa.state.tx.us/cong/loginForward.do?phase=check"
+- If the Agent does not do this it will reject the scrape.
+- Always with every request first navigate to: "https://mycpa.cpa.state.tx.us/cong/loginForward.do?phase=check"
+
+##Then navigate through these menu items on the left hand side of the page:
+Step2:
+
+- PUBLIC INFORMATION
+- TAXPAYER SEARCH
+For a Taxpayer: Search for information related to a specific taxpayer.
+Taxpayer List: Access a list of taxpayers.
+LEASE SEARCH
+By Drilling Permit: Search for leases using a drilling permit number (as shown in the main panel with a 6-digit input field).
+By Lease Name: Search for leases using the lease name.
+By Lease Number: Search for leases using the lease number.
+By Project Number: Search for leases using the project number.
+Exemptions by Taxpayer Number: Search for exemptions associated with a taxpayer number.
+Leases Subject 10% Penalty: Search for leases subject to a 10% penalty.
+Lease Drop-Crude Oil: Search for lease drops related to crude oil.
+Lease Drop-Natural Gas: Search for lease drops related to natural gas.
+RESOURCES
+Useful Links: Access a collection of useful links for additional resources.
+SECURE INFORMATION
+MY TAX REPORTS
+Report Details: View details of tax reports.
+Report Errors: View errors in tax reports.
+Data Changes: View changes made to data in tax reports.
+Tax Savings: View tax savings information.
+MY TAX ACCOUNT
+Account Detail: View detailed information about the tax account.
+Account Balance: View the balance of the tax account.
+REFUNDS ISSUED
+My Refund History: View the history of issued refunds.
+REQUESTS
+Request: Submit or manage requests
+
+STEP 3
+The agent will select “Lease Drop-Crude Oil:”
+url:””
+
+## *REQUIRED
+
+- **Lease Number:** 011457 [6 digits]
+
+OR
+
+- **Drilling Permit Number:** [6 digits]
+- **Beg Period:** 2201 [yyyy or yy]
+- **End Period:** 2301 [yyyy or yy]
+
+## Optional Select Criteria
+
+- **Taxpayer Number:** [11 digits]
+- **Sub Type:** [dropdown]
+- **Secondary Taxpayer:** [11 digits]
+- **County:** [dropdown]
+- **API Number:** [8 digits]
+- **Project Number:** [10 characters]
+- **Exemption:** [2 digits]
+- **Incremental Exemption:** [dropdown]
+
+#Output
+- The output is an html table it looks like the below example. 
+- The AI needs to read this table and provide an indepth analysis. 
+## Markdown Example
+
+| Period | Sub Type | Primary Taxpayer # | Cnty/DPI | Xmpt Type #1 | Xmpt Type #2 | Xmpt Type #3 | API No./Proj No. | Incr | Other Party Taxpayer# | Other Party Name                     | Liability/API GR | Gross Barrels | Gov Roy Barrels | Taxable Barrels | Gross Value  | Roy Value | Truck Cost | Net Value  | Type 5/14 Reduced Rate | Type 5/14 Tax Due | Loc Num | Error Status |
+|--------|----------|--------------------|----------|-------------|-------------|-------------|------------------|------|----------------------|--------------------------------------|------------------|---------------|-----------------|-----------------|--------------|-----------|------------|------------|------------------------|-------------------|---------|--------------|
+| **2201** | Pur      | 17605871155        | 212/NO   |             |             |             |                  |      | 18304145511          | JOHN LINDER OPERATING COMPANY, L.L.C. | YES/49.9         | 120           | 0               | 120             | $9,999.69    | $0.00     | $0.00      | $9,999.69  | 0.000                  | $0.00             | 0003145 | NO           |
+| **2201** | Pur      | 32048848249        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/45.5         | 5,242         | 1               | 5,241           | $439,102.75  | $79.91    | $0.00      | $439,022.84| 0.000                  | $0.00             | 0000109 | NO           |
+| **2202** | Pur      | 32048848249        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/45.1         | 4,233         | 1               | 4,232           | $393,305.98  | $71.58    | $0.00      | $393,234.40| 0.000                  | $0.00             | 0000119 | NO           |
+| **2203** | Pur      | 17605805088        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/35.0         | 5,082         | 0               | 5,082           | $551,049.84  | $0.00     | $0.00      | $551,049.84| 0.000                  | $0.00             | 0001057 | NO           |
+| **2204** | Pur      | 17605805088        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/42.2         | 3,853         | 0               | 3,853           | $401,487.04  | $0.00     | $0.00      | $401,487.04| 0.000                  | $0.00             | 0002046 | NO           |
+| **2204** | Pur      | 17605871155        | 212/NO   |             |             |             |                  |      | 18304145511          | JOHN LINDER OPERATING COMPANY, L.L.C. | YES/48.7         | 127           | 0               | 127             | $12,949.21   | $0.00     | $0.00      | $12,949.21 | 0.000                  | $0.00             | 0003149 | NO           |
+| **2205** | Pur      | 17605805088        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/43.2         | 5,776         | 0               | 5,776           | $633,666.00  | $0.00     | $0.00      | $633,666.00| 0.000                  | $0.00             | 0001022 | NO           |
+| **2206** | Pur      | 17605805088        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/43.3         | 5,227         | 0               | 5,227           | $606,452.62  | $0.00     | $0.00      | $606,452.62| 0.000                  | $0.00             | 0002027 | NO           |
+| **2206** | Pur      | 17605871155        | 212/NO   |             |             |             |                  |      | 18304145511          | JOHN LINDER OPERATING COMPANY, L.L.C. | YES/48.5         | 117           | 0               | 117             | $13,483.41   | $0.00     | $0.00      | $13,483.41 | 0.000                  | $0.00             | 0003178 | NO           |
+| **2207** | Pur      | 17605805088        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/43.3         | 5,579         | 0               | 5,579           | $563,144.98  | $0.00     | $0.00      | $563,144.98| 0.000                  | $0.00             | 0001078 | NO           |
+| **2208** | Pur      | 17605805088        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/43.3         | 4,625         | 0               | 4,625           | $434,261.99  | $0.00     | $0.00      | $434,261.99| 0.000                  | $0.00             | 0001052 | NO           |
+| **2208** | Pur      | 17605871155        | 212/NO   |             |             |             |                  |      | 18304145511          | JOHN LINDER OPERATING COMPANY, L.L.C. | YES/48.0         | 103           | 0               | 103             | $9,491.62    | $0.00     | $0.00      | $9,491.62  | 0.000                  | $0.00             | 0003191 | NO           |
+| **2209** | Pur      | 17605805088        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/43.1         | 4,617         | 0               | 4,617           | $401,795.55  | $0.00     | $0.00      | $401,795.55| 0.000                  | $0.00             | 0000952 | NO           |
+| **2210** | Pur      | 32048848249        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/42.9         | 3,720         | 1               | 3,719           | $331,438.63  | $60.32    | $0.00      | $331,378.31| 0.000                  | $0.00             | 0000110 | NO           |
+| **2210** | Pur      | 32085230236        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/41.9         | 96            | 1               | 95              | $8,446.87    | $0.60     | $0.00      | $8,446.27  | 0.000                  | $0.00             | 0000002 | NO           |
+| **2211** | Pur      | 17605871155        | 212/NO   |             |             |             |                  |      | 18304145511          | JOHN LINDER OPERATING COMPANY, L.L.C. | YES/51.1         | 126           | 0               | 126             | $10,741.40   | $0.00     | $0.00      | $10,741.40 | 0.000                  | $0.00             | 0003074 | NO           |
+| **2211** | Pur      | 32048848249        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/43.0         | 2,880         | 1               | 2,879           | $250,617.41  | $45.61    | $0.00      | $250,571.80| 0.000                  | $0.00             | 0000069 | NO           |
+| **2212** | Pur      | 32085230236        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/42.8         | 4,280         | 78              | 4,202           | $335,232.37  | $6,100.89 | $0.00      | $329,131.48| 0.000                  | $0.00             | 0000034 | NO           |
+| **2301** | Pur      | 17605871155        | 212/NO   |             |             |             |                  |      | 18304145511          | JOHN LINDER OPERATING COMPANY, L.L.C. | YES/52.3         | 166           | 0               | 166             | $13,129.21   | $0.00     | $0.00      | $13,129.21 | 0.000                  | $0.00             | 0003116 | NO           |
+| **2301** | Pur      | 32085230236        | 128/NO   |             |             |             |                  |      | 14115870413          | BLACKBRUSH O & G, LLC                | YES/42.9         | 6,860         | 1               | 6,859           | $534,432.03  | $97.27    | $0.00      | $534,334.76| 0.000                  | $0.00             | 0000005 | NO           |
+
+##CSV Example
+"Sub
+Type","Primary
+Taxpayer #","Cnty/
+DPI",Xmpt Type #1,Xmpt Type #2,Xmpt Type #3,"API No./
+Proj No.",Incr,"Other Party
+Taxpayer#","Other Party
+Name","Liability/
+API GR","Gross
+Barrels","Gov Roy
+Barrels","Taxable
+Barrels","Gross
+Value","Roy
+Value","Truck
+Cost","Net
+Value","Type 5/14
+Reduced Rate","Type 5/14
+Tax Due","Loc
+Num","Error
+Status"
+,Period: 2201,,,,,,,,,,,,,,,,,,,,
+Pur,17605871155,212/NO,,,,,,18304145511,"JOHN LINDER OPERATING COMPANY, L.L.C.",YES/49.9,120,0,120,"$9,999.69",$0.00,$0.00,"$9,999.69",0,$0.00,3145,NO
+Pur,32048848249,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/45.5,"5,242",1,"5,241","$439,102.75",$79.91,$0.00,"$439,022.84",0,$0.00,109,NO
+,Period: 2202,,,,,,,,,,,,,,,,,,,,
+Pur,32048848249,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/45.1,"4,233",1,"4,232","$393,305.98",$71.58,$0.00,"$393,234.40",0,$0.00,119,NO
+,Period: 2203,,,,,,,,,,,,,,,,,,,,
+Pur,17605805088,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/35.0,"5,082",0,"5,082","$551,049.84",$0.00,$0.00,"$551,049.84",0,$0.00,1057,NO
+,Period: 2204,,,,,,,,,,,,,,,,,,,,
+Pur,17605805088,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/42.2,"3,853",0,"3,853","$401,487.04",$0.00,$0.00,"$401,487.04",0,$0.00,2046,NO
+Pur,17605871155,212/NO,,,,,,18304145511,"JOHN LINDER OPERATING COMPANY, L.L.C.",YES/48.7,127,0,127,"$12,949.21",$0.00,$0.00,"$12,949.21",0,$0.00,3149,NO
+,Period: 2205,,,,,,,,,,,,,,,,,,,,
+Pur,17605805088,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/43.2,"5,776",0,"5,776","$633,666.00",$0.00,$0.00,"$633,666.00",0,$0.00,1022,NO
+,Period: 2206,,,,,,,,,,,,,,,,,,,,
+Pur,17605805088,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/43.3,"5,227",0,"5,227","$606,452.62",$0.00,$0.00,"$606,452.62",0,$0.00,2027,NO
+Pur,17605871155,212/NO,,,,,,18304145511,"JOHN LINDER OPERATING COMPANY, L.L.C.",YES/48.5,117,0,117,"$13,483.41",$0.00,$0.00,"$13,483.41",0,$0.00,3178,NO
+,Period: 2207,,,,,,,,,,,,,,,,,,,,
+Pur,17605805088,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/43.3,"5,579",0,"5,579","$563,144.98",$0.00,$0.00,"$563,144.98",0,$0.00,1078,NO
+,Period: 2208,,,,,,,,,,,,,,,,,,,,
+Pur,17605805088,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/43.3,"4,625",0,"4,625","$434,261.99",$0.00,$0.00,"$434,261.99",0,$0.00,1052,NO
+Pur,17605871155,212/NO,,,,,,18304145511,"JOHN LINDER OPERATING COMPANY, L.L.C.",YES/48.0,103,0,103,"$9,491.62",$0.00,$0.00,"$9,491.62",0,$0.00,3191,NO
+,Period: 2209,,,,,,,,,,,,,,,,,,,,
+Pur,17605805088,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/43.1,"4,617",0,"4,617","$401,795.55",$0.00,$0.00,"$401,795.55",0,$0.00,952,NO
+,Period: 2210,,,,,,,,,,,,,,,,,,,,
+Pur,32048848249,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/42.9,"3,720",1,"3,719","$331,438.63",$60.32,$0.00,"$331,378.31",0,$0.00,110,NO
+Pur,32085230236,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/41.9,96,1,95,"$8,446.87",$0.60,$0.00,"$8,446.27",0,$0.00,2,NO
+,Period: 2211,,,,,,,,,,,,,,,,,,,,
+Pur,17605871155,212/NO,,,,,,18304145511,"JOHN LINDER OPERATING COMPANY, L.L.C.",YES/51.1,126,0,126,"$10,741.40",$0.00,$0.00,"$10,741.40",0,$0.00,3074,NO
+Pur,32048848249,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/43.0,"2,880",1,"2,879","$250,617.41",$45.61,$0.00,"$250,571.80",0,$0.00,69,NO
+,Period: 2212,,,,,,,,,,,,,,,,,,,,
+Pur,32085230236,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/42.8,"4,280",78,"4,202","$335,232.37","$6,100.89",$0.00,"$329,131.48",0,$0.00,34,NO
+,Period: 2301,,,,,,,,,,,,,,,,,,,,
+Pur,17605871155,212/NO,,,,,,18304145511,"JOHN LINDER OPERATING COMPANY, L.L.C.",YES/52.3,166,0,166,"$13,129.21",$0.00,$0.00,"$13,129.21",0,$0.00,3116,NO
+Pur,32085230236,128/NO,,,,,,14115870413,"BLACKBRUSH O & G, LLC",YES/42.9,"6,860",1,"6,859","$534,432.03",$97.27,$0.00,"$534,334.76",0,$0.00,5,NO
+
+
+#HTML CODE OF THE Page:
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<base href="https://mycpa.cpa.state.tx.us/cong/BaseLayout.jsp" />
+	
+	<title>
+		
+		CONG - Lease Drop - Crude Oil Inquiry
+	</title>
+	  <script type="text/javascript" src="/cong/ruxitagentjs_ICA7NQVfghqrux_10309250313144005.js" data-dtconfig="app=a3dacec2b7c374bb|cuc=b2p4c0jo|srms=2,2,1,|mel=100000|featureHash=ICA7NQVfghqrux|dpvc=1|md=mdcc1=a#userid|msl=153600|lastModification=1744859824621|tp=500,50,0|rdnt=0|uxrgce=1|agentUri=/cong/ruxitagentjs_ICA7NQVfghqrux_10309250313144005.js|reportUrl=/cong/rb_aa0d8627-1e7d-4c76-878d-d057f0f9587b|rid=RID_917372248|rpid=328372892|domain=state.tx.us"></script><style type="text/css" media="all">
+      @import url("/cong/css/maven-base.css");
+      @import url("/cong/css/maven-theme.css");
+      @import url("/cong/css/site.css");
+      @import url("/cong/css/screen.css");
+      @import url("/cong/css/displaytag.css");
+      @import url("/cong/css/cong.css");
+  </style>
+  <link rel="stylesheet" href="/cong/css/print.css" type="text/css" media="print" />
+    <script type="text/JavaScript">
+      function OpenPopup(popurl,width,height) { 
+        var popinfo='resizable=yes,width='; 
+            popinfo+=width;
+            popinfo+=',height=';
+            popinfo+=height;
+            popinfo+=',status=yes,resizable=yes,scrollbars=yes,menubar=yes,toolbar=yes,location=yes'; 
+        window.open(popurl,'',popinfo,'_blank'); 
+        return false;
+      } 
+    </script>
+</head>
+<body>
+	<!-- BEGIN Header -->	
+		<!-- BEGIN header -->
+
+<div id="cpa_header">   
+	<!-- START COMPTROLLER HEADER -->
+<!-- Piwik -->
+ <script type="text/javascript" src="/include/js/piwik/tracker.js"></script>
+<!-- End Piwik Code -->
+
+<div style="font-family: Helvetica, Arial, sans-serif; background-color: #000000; color: #ffffff; padding: 0; margin: 0; text-align:left; width: 100%; height: 42px;">
+	<a href="https://comptroller.texas.gov">
+		<img src="/images/silversealIE.png" style="height: 37px; width: 37px; display: block; padding: 2px; border: none; float: left !important;" alt="Link to Texas Comptroller of Public Accounts"  />
+	</a>
+	<p style="font-size: 12px !important; line-height: 1.2em !important; color: #ffffff; padding: 7px 15px 7px 15px;margin: 0; float: left;">
+		<strong>Glenn Hegar</strong><br/>
+		<small>Texas Comptroller of Public Accounts</small>
+	</p>
+</div>
+<div style="clear: both;"></div>
+<!-- END COMPTROLLER HEADER -->
+
+
+  
+</div>
+
+<!-- END header -->
+
+	<!-- END Header -->
+	
+	<!--  Banner Starts Here -->
+				<div id="banner">
+			<a href="/cong/Index.jsp" id="bannerLeft"> 
+				<img src="/cong/images/congv4.jpg" alt="Crude Oil and Natural Gas" /> 
+		  	</a>		  	
+			<div class="clear">
+				<hr/>
+			</div>
+		</div>
+
+	<!--  Banner Ends Here -->
+		
+	<!--  Breadcrumbs Start Here -->
+		<div id="breadcrumbs">
+			<div class="xright">
+				
+				<a href="demo/demo1.html" target="_blank" style="color: #545454;font-weight: bold;" title="Demo link opens in a new window">Demo</a> |	
+				
+				
+				<a title="Help link opens new window" href="/cong/help/help_LeaseDropCO.html
+					" style="color: #545454;font-weight: bold;" onclick="OpenPopup(this.href,650,400); return false">Help</a>	
+					
+		
+				  	
+				| <a title="Help Index link opens new window" href="/cong/help/help_index.html
+					" style="color:#545454;font-weight: bold;" onclick="OpenPopup(this.href,650,400); return false">Help Index</a>				
+				| <a href="/cong/loginForward.do" style="color: #545454;font-weight: bold;">Login</a>
+				| <a href="/cong/logoutAction.do" style="color: #545454;font-weight: bold;">Logout</a>
+		         
+	
+			</div>
+			<div class="clear">
+				<hr/>
+			</div>
+		</div>
+	<!--  Breadcrumbs End Here -->
+	
+	<!-- Menu and Content Start Here -->
+	<noscript>
+		<div class="stopandthink">
+			This application requires JavaScript!
+		</div>
+	</noscript>
+
+	<!-- Menu and Content Start Here -->
+	
+	<div id="menucontenttable">	
+		
+
+
+
+		<table style="border-style: none; width: 100%;" summary="layout only">
+			<tr>
+			<!--  Menu Starts Here -->
+				<td style="vertical-align: top; width: 10%">
+					<a href="#content" class="hiddenSkipToContent">Skip to content</a>
+					
+
+
+
+
+
+
+
+
+
+<div id="leftColumn">
+	<div id="navcolumn">					
+		<h4><strong>Public Information</strong> </h4>
+		<h5>Taxpayer Search</h5>
+		<ul>			
+			<li class="none">
+				<a href="/cong/taxpayerSearchForward.do">For a Taxpayer</a>
+			</li>
+			<li>
+				<a href="/cong/taxpayerListMenuForward.do">Taxpayer List</a>
+			</li>
+		</ul>	
+		<h5>Lease Search </h5>
+		<ul>
+			<li>
+				<a href="/cong/leasePermitSearchForward.do">By Drilling Permit</a>
+			</li>
+			<li>
+				<a href="/cong/leaseNameSearchForward.do">By Lease Name</a>
+			</li>
+			<li>
+				<a href="/cong/leaseNumberSearchForward.do">By Lease Number</a>
+			</li>  
+			<li>
+				<a href="/cong/projectNumberSearchForward.do">By Project Number</a>
+			</li>  
+<!--ACR 28907 added exemption search--> 
+			<li>
+				<a href="/cong/exemptLeaseSearchForward.do">Exemptions by Taxpayer Number</a>
+			</li> 		
+<!--ACR 30398 commenting out--> 	
+<!--		
+			<li>
+				<a href="/cong/type05SavingsForward.do">Type 05 Savings</a>
+			</li>
+--> 			
+			
+			<li>
+				<a href="/cong/10pctPenaltyForward.do">Leases Subject 10% Penalty</a>
+			</li>
+			
+			<li>
+				<a href="/cong/reportLeaseDropCOForward.do">Lease Drop-Crude Oil</a>
+			</li>
+			
+			<li>
+				<a href="/cong/reportLeaseDropNGForward.do">Lease Drop-Natural Gas</a>
+			</li>
+			
+		</ul>	
+		<h5>Resources</h5>
+		<ul>			
+			<li>
+				<a href="/cong/usefulLinksForward.do">Useful Links</a>
+			</li>
+		</ul>
+				
+		<h4><strong>Secure Information</strong> </h4>
+		<h5>My Tax Reports </h5>
+
+		<ul>
+		   <li>
+				<a href="/cong/reportDetailForward.do">Report Details</a>
+			  </li>
+			<li>
+				<a href="/cong/reportsMenu.do">Report Errors</a>				
+			</li>				
+ 			  <li>
+				<a href="/cong/reportChangesForward.do">Data Changes</a>
+			</li>
+<!--ACR 30445 moved to the secure area --> 	
+			<li>
+				<a href="/cong/type05SavingsForward.do">Type 05 Savings</a>
+			</li>
+	    </ul>
+
+		<h5>My Tax Account </h5>
+		<ul>
+			  <li>
+				<a href="/cong/accountDetailForward.do">Account Detail</a>
+			 </li>
+	
+			  <li>
+				<a href="/cong/accountDetailIntPnltyForward.do">Account Balance</a>
+			  </li>
+	
+	
+			  <li>
+				<a href="/cong/refundsIssuedForward.do">Refunds Issued</a>
+			  </li>
+	
+				
+		</ul>	
+	</div>
+	
+	<div id="navcolumn">	
+		<h5>My Account History</h5>
+		<ul>
+			<li>
+				<a href="/cong/AccountHistoryRequestForward.do">Request</a>
+			</li>
+<!--	commented out due to ACR# 42672 05/09/2012 R.Kouns	 
+			<li>
+				<a href="/cong/accountHistoryRetrievalAction.do">Retrieve</a>
+			</li>
+-->
+		</ul>							
+	</div>
+</div>
+			
+		
+				</td>
+			<!--  Menu Ends Here -->
+			<!-- User Messages and main Content Starts Here -->
+				<td style="vertical-align: top; width: 90%">
+					<div class="section">
+						<a name="content" id="content"></a>						
+						
+
+
+
+
+
+
+<!-- BEGIN message -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- END message -->
+
+						
+
+
+
+
+<!-- BEGIN titlePage -->
+
+
+
+<h1 style="margin-top: 0; margin-bottom: .25em; padding-top: 0; padding-bottom: .10em;">
+	Lease Drop - Crude Oil Inquiry
+</h1>
+<!-- <h3 style="margin-top: 0; margin-bottom: .25em; padding-top: 0; padding-bottom: .10em;">
+	Lease Drop - Crude Oil Inquiry
+</h3> -->
+<!-- END titlePage -->
+
+						
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://www.google.com/recaptcha/api.js?render=6Lf6Z5sUAAAAACg7ECAeRMcnAo2_WfoKUeNYXkj_"></script>
+<script>
+	grecaptcha.ready(function() {
+		   grecaptcha.execute('6Lf6Z5sUAAAAACg7ECAeRMcnAo2_WfoKUeNYXkj_', {action: '/leaseDropCOAction'}).then(function(token) {   	
+
+            
+	    	var recaptchaResponse = document.getElementById('recaptchaResponse');
+            recaptchaResponse.value = token;
+	    	
+	    });
+	});
+</script>
+ 
+<style type="text/css">
+
+	td.rjust
+	{ 	text-align: right;
+		white-space: nowrap
+	}	
+	
+	td.ljust
+	{ 	text-align: left; 
+		white-space: nowrap
+	}
+
+</style>
+
+
+
+
+
+
+<div id="tplistmenuWide" >
+	<form id="leaseDropCOForm" method="post" action="/cong/leaseDropCOAction.do">
+	
+	<p class="required">
+	  <br/>
+		<span style="white-space: nowrap; margin:0; padding:0;">
+			<strong>* REQUIRED </strong> 
+		</span>	
+	</p>
+	
+	 <div id="lseNm" style="white-space: nowrap; margin:0; padding:0;">
+		<label for="leaseNum" class="boldOnes">*Lease Number: </label>
+		<input type="text" name="leaseNum" maxlength="6" size="6" value="011457" id="leaseNum" />(6 digits)
+			
+	</div>
+	  
+	  <p>	 	
+	  	OR
+		</p>
+	  
+	 <p> 
+	  <span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="DPN" class="boldOnes">*Drilling Permit Number:</label>
+		<input type="text" name="DPN" maxlength="6" size="6" value="" id="DPN" />(6 digits)
+			
+	  </span>
+	</p>  
+	
+	
+	<p>
+	<br/>			
+			
+	<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="begFilPrd">*Beg Period:</label>
+		<input type="text" name="begFilPrd" maxlength="4" size="4" value="1601" id="begFilPrd" />
+		(yymm or yy)
+		
+	</span>		
+	</p>
+	<p>
+	<br/>
+  		
+	<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="endFilPrd">*End Period:</label>
+		<input type="text" name="endFilPrd" maxlength="4" size="4" value="2001" id="endFilPrd" />
+		(yymm or yy)		
+			
+	</span>	
+	</p>
+	
+	<p>
+	<br/>
+	Optional Select Criteria
+	<br/>
+	</p>
+	<p>
+  		<span style="white-space: nowrap; margin:0; padding:0;">
+			<label for="tpId" >*Taxpayer Number:</label>
+			<input type="text" name="tpId" maxlength="11" size="11" value="" id="tpId" />
+			(11 digits)
+			
+		</span>
+	</p>
+
+	<p>	
+		<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="subType">Sub Type: </label>
+		<select name="subType" id="subType"><option value="" selected="selected"></option>
+		    <option value="Purchaser">Purchaser</option>
+		    <option value="Producer">Producer</option></select>		
+	</span>
+	</p>
+	<p>
+	<span style="white-space: nowrap; margin:0; padding:0;">
+			<label for="scndTpId" >Secondary Taxpayer:</label>
+			<input type="text" name="scndTpId" maxlength="11" size="11" value="" id="scndTpId" />
+			(11 digits)
+			
+	</span>
+	</p>
+	
+	<p>
+	<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="county" class="boldOnes">County: </label>		
+		<select name="countyNumByName" id="county" style="width:180px;"><option value=" " selected="selected"> </option>
+				
+                 		<option value="ANDERSON - 001">ANDERSON - 001</option>
+				
+                 		<option value="ANDREWS - 002">ANDREWS - 002</option>
+				
+                 		<option value="ANGELINA - 003">ANGELINA - 003</option>
+				
+                 		<option value="ARANSAS - 004">ARANSAS - 004</option>
+				
+                 		<option value="ARCHER - 005">ARCHER - 005</option>
+				
+                 		<option value="ARMSTRONG - 006">ARMSTRONG - 006</option>
+				
+                 		<option value="ATASCOSA - 007">ATASCOSA - 007</option>
+				
+                 		<option value="AUSTIN - 008">AUSTIN - 008</option>
+				
+                 		<option value="BAILEY - 009">BAILEY - 009</option>
+				
+                 		<option value="BANDERA - 010">BANDERA - 010</option>
+				
+                 		<option value="BASTROP - 011">BASTROP - 011</option>
+				
+                 		<option value="BAYLOR - 012">BAYLOR - 012</option>
+				
+                 		<option value="BEE - 013">BEE - 013</option>
+				
+                 		<option value="BELL - 014">BELL - 014</option>
+				
+                 		<option value="BEXAR - 015">BEXAR - 015</option>
+				
+                 		<option value="BLANCO - 016">BLANCO - 016</option>
+				
+                 		<option value="BORDEN - 017">BORDEN - 017</option>
+				
+                 		<option value="BOSQUE - 018">BOSQUE - 018</option>
+				
+                 		<option value="BOWIE - 019">BOWIE - 019</option>
+				
+                 		<option value="BRAZORIA - 020">BRAZORIA - 020</option>
+				
+                 		<option value="BRAZOS - 021">BRAZOS - 021</option>
+				
+                 		<option value="BREWSTER - 022">BREWSTER - 022</option>
+				
+                 		<option value="BRISCOE - 023">BRISCOE - 023</option>
+				
+                 		<option value="BROOKS - 024">BROOKS - 024</option>
+				
+                 		<option value="BROWN - 025">BROWN - 025</option>
+				
+                 		<option value="BURLESON - 026">BURLESON - 026</option>
+				
+                 		<option value="BURNET - 027">BURNET - 027</option>
+				
+                 		<option value="CALDWELL - 028">CALDWELL - 028</option>
+				
+                 		<option value="CALHOUN - 029">CALHOUN - 029</option>
+				
+                 		<option value="CALLAHAN - 030">CALLAHAN - 030</option>
+				
+                 		<option value="CAMERON - 031">CAMERON - 031</option>
+				
+                 		<option value="CAMP - 032">CAMP - 032</option>
+				
+                 		<option value="CARSON - 033">CARSON - 033</option>
+				
+                 		<option value="CASS - 034">CASS - 034</option>
+				
+                 		<option value="CASTRO - 035">CASTRO - 035</option>
+				
+                 		<option value="CHAMBERS - 036">CHAMBERS - 036</option>
+				
+                 		<option value="CHEROKEE - 037">CHEROKEE - 037</option>
+				
+                 		<option value="CHILDRESS - 038">CHILDRESS - 038</option>
+				
+                 		<option value="CLAY - 039">CLAY - 039</option>
+				
+                 		<option value="COCHRAN - 040">COCHRAN - 040</option>
+				
+                 		<option value="COKE - 041">COKE - 041</option>
+				
+                 		<option value="COLEMAN - 042">COLEMAN - 042</option>
+				
+                 		<option value="COLLIN - 043">COLLIN - 043</option>
+				
+                 		<option value="COLLINGSWORTH - 044">COLLINGSWORTH - 044</option>
+				
+                 		<option value="COLORADO - 045">COLORADO - 045</option>
+				
+                 		<option value="COMAL - 046">COMAL - 046</option>
+				
+                 		<option value="COMANCHE - 047">COMANCHE - 047</option>
+				
+                 		<option value="CONCHO - 048">CONCHO - 048</option>
+				
+                 		<option value="COOKE - 049">COOKE - 049</option>
+				
+                 		<option value="CORYELL - 050">CORYELL - 050</option>
+				
+                 		<option value="COTTLE - 051">COTTLE - 051</option>
+				
+                 		<option value="CRANE - 052">CRANE - 052</option>
+				
+                 		<option value="CROCKETT - 053">CROCKETT - 053</option>
+				
+                 		<option value="CROSBY - 054">CROSBY - 054</option>
+				
+                 		<option value="CULBERSON - 055">CULBERSON - 055</option>
+				
+                 		<option value="DALLAM - 056">DALLAM - 056</option>
+				
+                 		<option value="DALLAS - 057">DALLAS - 057</option>
+				
+                 		<option value="DAWSON - 058">DAWSON - 058</option>
+				
+                 		<option value="DEAF SMITH - 059">DEAF SMITH - 059</option>
+				
+                 		<option value="DELTA - 060">DELTA - 060</option>
+				
+                 		<option value="DENTON - 061">DENTON - 061</option>
+				
+                 		<option value="DEWITT - 062">DEWITT - 062</option>
+				
+                 		<option value="DICKENS - 063">DICKENS - 063</option>
+				
+                 		<option value="DIMMIT - 064">DIMMIT - 064</option>
+				
+                 		<option value="DONLEY - 065">DONLEY - 065</option>
+				
+                 		<option value="DUVAL - 066">DUVAL - 066</option>
+				
+                 		<option value="EASTLAND - 067">EASTLAND - 067</option>
+				
+                 		<option value="ECTOR - 068">ECTOR - 068</option>
+				
+                 		<option value="EDWARDS - 069">EDWARDS - 069</option>
+				
+                 		<option value="EL PASO - 071">EL PASO - 071</option>
+				
+                 		<option value="ELLIS - 070">ELLIS - 070</option>
+				
+                 		<option value="ERATH - 072">ERATH - 072</option>
+				
+                 		<option value="FALLS - 073">FALLS - 073</option>
+				
+                 		<option value="FANNIN - 074">FANNIN - 074</option>
+				
+                 		<option value="FAYETTE - 075">FAYETTE - 075</option>
+				
+                 		<option value="FISHER - 076">FISHER - 076</option>
+				
+                 		<option value="FLOYD - 077">FLOYD - 077</option>
+				
+                 		<option value="FOARD - 078">FOARD - 078</option>
+				
+                 		<option value="FORT BEND - 079">FORT BEND - 079</option>
+				
+                 		<option value="FRANKLIN - 080">FRANKLIN - 080</option>
+				
+                 		<option value="FREESTONE - 081">FREESTONE - 081</option>
+				
+                 		<option value="FRIO - 082">FRIO - 082</option>
+				
+                 		<option value="GAINES - 083">GAINES - 083</option>
+				
+                 		<option value="GALVESTON - 084">GALVESTON - 084</option>
+				
+                 		<option value="GARZA - 085">GARZA - 085</option>
+				
+                 		<option value="GILLESPIE - 086">GILLESPIE - 086</option>
+				
+                 		<option value="GLASSCOCK - 087">GLASSCOCK - 087</option>
+				
+                 		<option value="GOLIAD - 088">GOLIAD - 088</option>
+				
+                 		<option value="GONZALES - 089">GONZALES - 089</option>
+				
+                 		<option value="GRAY - 090">GRAY - 090</option>
+				
+                 		<option value="GRAYSON - 091">GRAYSON - 091</option>
+				
+                 		<option value="GREGG - 092">GREGG - 092</option>
+				
+                 		<option value="GRIMES - 093">GRIMES - 093</option>
+				
+                 		<option value="GUADALUPE - 094">GUADALUPE - 094</option>
+				
+                 		<option value="HALE - 095">HALE - 095</option>
+				
+                 		<option value="HALL - 096">HALL - 096</option>
+				
+                 		<option value="HAMILTON - 097">HAMILTON - 097</option>
+				
+                 		<option value="HANSFORD - 098">HANSFORD - 098</option>
+				
+                 		<option value="HARDEMAN - 099">HARDEMAN - 099</option>
+				
+                 		<option value="HARDIN - 100">HARDIN - 100</option>
+				
+                 		<option value="HARRIS - 101">HARRIS - 101</option>
+				
+                 		<option value="HARRISON - 102">HARRISON - 102</option>
+				
+                 		<option value="HARTLEY - 103">HARTLEY - 103</option>
+				
+                 		<option value="HASKELL - 104">HASKELL - 104</option>
+				
+                 		<option value="HAYS - 105">HAYS - 105</option>
+				
+                 		<option value="HEMPHILL - 106">HEMPHILL - 106</option>
+				
+                 		<option value="HENDERSON - 107">HENDERSON - 107</option>
+				
+                 		<option value="HIDALGO - 108">HIDALGO - 108</option>
+				
+                 		<option value="HILL - 109">HILL - 109</option>
+				
+                 		<option value="HOCKLEY - 110">HOCKLEY - 110</option>
+				
+                 		<option value="HOOD - 111">HOOD - 111</option>
+				
+                 		<option value="HOPKINS - 112">HOPKINS - 112</option>
+				
+                 		<option value="HOUSTON - 113">HOUSTON - 113</option>
+				
+                 		<option value="HOWARD - 114">HOWARD - 114</option>
+				
+                 		<option value="HUDSPETH - 115">HUDSPETH - 115</option>
+				
+                 		<option value="HUNT - 116">HUNT - 116</option>
+				
+                 		<option value="HUTCHINSON - 117">HUTCHINSON - 117</option>
+				
+                 		<option value="IRION - 118">IRION - 118</option>
+				
+                 		<option value="JACK - 119">JACK - 119</option>
+				
+                 		<option value="JACKSON - 120">JACKSON - 120</option>
+				
+                 		<option value="JASPER - 121">JASPER - 121</option>
+				
+                 		<option value="JEFF DAVIS - 122">JEFF DAVIS - 122</option>
+				
+                 		<option value="JEFFERSON - 123">JEFFERSON - 123</option>
+				
+                 		<option value="JIM HOGG - 124">JIM HOGG - 124</option>
+				
+                 		<option value="JIM WELLS - 125">JIM WELLS - 125</option>
+				
+                 		<option value="JOHNSON - 126">JOHNSON - 126</option>
+				
+                 		<option value="JONES - 127">JONES - 127</option>
+				
+                 		<option value="KARNES - 128">KARNES - 128</option>
+				
+                 		<option value="KAUFMAN - 129">KAUFMAN - 129</option>
+				
+                 		<option value="KENDALL - 130">KENDALL - 130</option>
+				
+                 		<option value="KENEDY - 131">KENEDY - 131</option>
+				
+                 		<option value="KENT - 132">KENT - 132</option>
+				
+                 		<option value="KERR - 133">KERR - 133</option>
+				
+                 		<option value="KIMBLE - 134">KIMBLE - 134</option>
+				
+                 		<option value="KING - 135">KING - 135</option>
+				
+                 		<option value="KINNEY - 136">KINNEY - 136</option>
+				
+                 		<option value="KLEBERG - 137">KLEBERG - 137</option>
+				
+                 		<option value="KNOX - 138">KNOX - 138</option>
+				
+                 		<option value="LA SALLE - 142">LA SALLE - 142</option>
+				
+                 		<option value="LAMAR - 139">LAMAR - 139</option>
+				
+                 		<option value="LAMB - 140">LAMB - 140</option>
+				
+                 		<option value="LAMPASAS - 141">LAMPASAS - 141</option>
+				
+                 		<option value="LAVACA - 143">LAVACA - 143</option>
+				
+                 		<option value="LEE - 144">LEE - 144</option>
+				
+                 		<option value="LEON - 145">LEON - 145</option>
+				
+                 		<option value="LIBERTY - 146">LIBERTY - 146</option>
+				
+                 		<option value="LIMESTONE - 147">LIMESTONE - 147</option>
+				
+                 		<option value="LIPSCOMB - 148">LIPSCOMB - 148</option>
+				
+                 		<option value="LIVE OAK - 149">LIVE OAK - 149</option>
+				
+                 		<option value="LLANO - 150">LLANO - 150</option>
+				
+                 		<option value="LOVING - 151">LOVING - 151</option>
+				
+                 		<option value="LUBBOCK - 152">LUBBOCK - 152</option>
+				
+                 		<option value="LYNN - 153">LYNN - 153</option>
+				
+                 		<option value="MADISON - 154">MADISON - 154</option>
+				
+                 		<option value="MARION - 155">MARION - 155</option>
+				
+                 		<option value="MARTIN - 156">MARTIN - 156</option>
+				
+                 		<option value="MASON - 157">MASON - 157</option>
+				
+                 		<option value="MATAGORDA - 158">MATAGORDA - 158</option>
+				
+                 		<option value="MAVERICK - 159">MAVERICK - 159</option>
+				
+                 		<option value="MCCULLOCH - 160">MCCULLOCH - 160</option>
+				
+                 		<option value="MCLENNAN - 161">MCLENNAN - 161</option>
+				
+                 		<option value="MCMULLEN - 162">MCMULLEN - 162</option>
+				
+                 		<option value="MEDINA - 163">MEDINA - 163</option>
+				
+                 		<option value="MENARD - 164">MENARD - 164</option>
+				
+                 		<option value="MIDLAND - 165">MIDLAND - 165</option>
+				
+                 		<option value="MILAM - 166">MILAM - 166</option>
+				
+                 		<option value="MILLS - 167">MILLS - 167</option>
+				
+                 		<option value="MITCHELL - 168">MITCHELL - 168</option>
+				
+                 		<option value="MONTAGUE - 169">MONTAGUE - 169</option>
+				
+                 		<option value="MONTGOMERY - 170">MONTGOMERY - 170</option>
+				
+                 		<option value="MOORE - 171">MOORE - 171</option>
+				
+                 		<option value="MORRIS - 172">MORRIS - 172</option>
+				
+                 		<option value="MOTLEY - 173">MOTLEY - 173</option>
+				
+                 		<option value="NACOGDOCHES - 174">NACOGDOCHES - 174</option>
+				
+                 		<option value="NAVARRO - 175">NAVARRO - 175</option>
+				
+                 		<option value="NEWTON - 176">NEWTON - 176</option>
+				
+                 		<option value="NOLAN - 177">NOLAN - 177</option>
+				
+                 		<option value="NUECES - 178">NUECES - 178</option>
+				
+                 		<option value="OCHILTREE - 179">OCHILTREE - 179</option>
+				
+                 		<option value="OLDHAM - 180">OLDHAM - 180</option>
+				
+                 		<option value="ORANGE - 181">ORANGE - 181</option>
+				
+                 		<option value="PALO PINTO - 182">PALO PINTO - 182</option>
+				
+                 		<option value="PANOLA - 183">PANOLA - 183</option>
+				
+                 		<option value="PARKER - 184">PARKER - 184</option>
+				
+                 		<option value="PARMER - 185">PARMER - 185</option>
+				
+                 		<option value="PECOS - 186">PECOS - 186</option>
+				
+                 		<option value="POLK - 187">POLK - 187</option>
+				
+                 		<option value="POTTER - 188">POTTER - 188</option>
+				
+                 		<option value="PRESIDIO - 189">PRESIDIO - 189</option>
+				
+                 		<option value="RAINS - 190">RAINS - 190</option>
+				
+                 		<option value="RANDALL - 191">RANDALL - 191</option>
+				
+                 		<option value="REAGAN - 192">REAGAN - 192</option>
+				
+                 		<option value="REAL - 193">REAL - 193</option>
+				
+                 		<option value="RED RIVER - 194">RED RIVER - 194</option>
+				
+                 		<option value="REEVES - 195">REEVES - 195</option>
+				
+                 		<option value="REFUGIO - 196">REFUGIO - 196</option>
+				
+                 		<option value="ROBERTS - 197">ROBERTS - 197</option>
+				
+                 		<option value="ROBERTSON - 198">ROBERTSON - 198</option>
+				
+                 		<option value="ROCKWALL - 199">ROCKWALL - 199</option>
+				
+                 		<option value="RUNNELS - 200">RUNNELS - 200</option>
+				
+                 		<option value="RUSK - 201">RUSK - 201</option>
+				
+                 		<option value="SABINE - 202">SABINE - 202</option>
+				
+                 		<option value="SAN AUGUSTINE - 203">SAN AUGUSTINE - 203</option>
+				
+                 		<option value="SAN JACINTO - 204">SAN JACINTO - 204</option>
+				
+                 		<option value="SAN PATRICIO - 205">SAN PATRICIO - 205</option>
+				
+                 		<option value="SAN SABA - 206">SAN SABA - 206</option>
+				
+                 		<option value="SCHLEICHER - 207">SCHLEICHER - 207</option>
+				
+                 		<option value="SCURRY - 208">SCURRY - 208</option>
+				
+                 		<option value="SHACKELFORD - 209">SHACKELFORD - 209</option>
+				
+                 		<option value="SHELBY - 210">SHELBY - 210</option>
+				
+                 		<option value="SHERMAN - 211">SHERMAN - 211</option>
+				
+                 		<option value="SMITH - 212">SMITH - 212</option>
+				
+                 		<option value="SOMERVELL - 213">SOMERVELL - 213</option>
+				
+                 		<option value="STARR - 214">STARR - 214</option>
+				
+                 		<option value="STEPHENS - 215">STEPHENS - 215</option>
+				
+                 		<option value="STERLING - 216">STERLING - 216</option>
+				
+                 		<option value="STONEWALL - 217">STONEWALL - 217</option>
+				
+                 		<option value="SUTTON - 218">SUTTON - 218</option>
+				
+                 		<option value="SWISHER - 219">SWISHER - 219</option>
+				
+                 		<option value="TARRANT - 220">TARRANT - 220</option>
+				
+                 		<option value="TAYLOR - 221">TAYLOR - 221</option>
+				
+                 		<option value="TERRELL - 222">TERRELL - 222</option>
+				
+                 		<option value="TERRY - 223">TERRY - 223</option>
+				
+                 		<option value="THROCKMORTON - 224">THROCKMORTON - 224</option>
+				
+                 		<option value="TITUS - 225">TITUS - 225</option>
+				
+                 		<option value="TOM GREEN - 226">TOM GREEN - 226</option>
+				
+                 		<option value="TRAVIS - 227">TRAVIS - 227</option>
+				
+                 		<option value="TRINITY - 228">TRINITY - 228</option>
+				
+                 		<option value="TYLER - 229">TYLER - 229</option>
+				
+                 		<option value="UPSHUR - 230">UPSHUR - 230</option>
+				
+                 		<option value="UPTON - 231">UPTON - 231</option>
+				
+                 		<option value="UVALDE - 232">UVALDE - 232</option>
+				
+                 		<option value="VAL VERDE - 233">VAL VERDE - 233</option>
+				
+                 		<option value="VAN ZANDT - 234">VAN ZANDT - 234</option>
+				
+                 		<option value="VICTORIA - 235">VICTORIA - 235</option>
+				
+                 		<option value="WALKER - 236">WALKER - 236</option>
+				
+                 		<option value="WALLER - 237">WALLER - 237</option>
+				
+                 		<option value="WARD - 238">WARD - 238</option>
+				
+                 		<option value="WASHINGTON - 239">WASHINGTON - 239</option>
+				
+                 		<option value="WEBB - 240">WEBB - 240</option>
+				
+                 		<option value="WHARTON - 241">WHARTON - 241</option>
+				
+                 		<option value="WHEELER - 242">WHEELER - 242</option>
+				
+                 		<option value="WICHITA - 243">WICHITA - 243</option>
+				
+                 		<option value="WILBARGER - 244">WILBARGER - 244</option>
+				
+                 		<option value="WILLACY - 245">WILLACY - 245</option>
+				
+                 		<option value="WILLIAMSON - 246">WILLIAMSON - 246</option>
+				
+                 		<option value="WILSON - 247">WILSON - 247</option>
+				
+                 		<option value="WINKLER - 248">WINKLER - 248</option>
+				
+                 		<option value="WISE - 249">WISE - 249</option>
+				
+                 		<option value="WOOD - 250">WOOD - 250</option>
+				
+                 		<option value="YOAKUM - 251">YOAKUM - 251</option>
+				
+                 		<option value="YOUNG - 252">YOUNG - 252</option>
+				
+                 		<option value="ZAPATA - 253">ZAPATA - 253</option>
+				
+                 		<option value="ZAVALA - 254">ZAVALA - 254</option></select>
+					
+	</span>	
+	</p>
+	
+	<p>	
+		<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="apiNum">API Number:</label>
+		<input type="text" name="apiNum" maxlength="8" size="8" value="" id="apiNum" />
+									(8 digits)		
+			
+	</span>
+	</p>
+	<p>
+	<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="projNr">Project Number:</label>
+		<input type="text" name="projNr" maxlength="10" size="8" value="" id="projNr" />
+									(10 characters)		
+			
+	</span>
+	</p>
+	<p>
+	<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="exemptType">Exemption:</label>
+		<input type="text" name="exemptType" maxlength="2" size="2" value="" id="exemptType" />
+									(2 digits)		
+			
+	</span>
+	</p>
+	<p>	
+	<span style="white-space: nowrap; margin:0; padding:0;">
+		<label for="incrXmpt">Incremental Exemption:</label>
+		<select name="incrXmpt" id="incrXmpt"><option value="" selected="selected"></option>
+			<option value="3">Both</option>
+		    <option value="1">Baseline</option>
+			<option value="2">Incremental</option></select>		
+	</span>
+	</p>
+	<input type="hidden" name="recaptchaResponse" id="recaptchaResponse">
+	
+	<p>	
+	  <input type="submit" accesskey="" value="Search" class="inquirysubmitbutton" />	
+	</p>
+	
+
+	</form>
+</div>
+
+<br style="clear: left;"/> 
+
+
+ 
+  
+		
+<table class="leasenumbertable">
+<thead>
+<tr>
+<th>Sub<br/>Type</th>
+<th>Primary<br/>Taxpayer #</th>
+<th>Cnty/<br/>DPI</th>
+<th>Xmpt Type #1</th>
+<th>Xmpt Type #2</th>
+<th>Xmpt Type #3</th>
+<th>API No./<br/> Proj No.</th>
+<th>Incr</th>
+<th>Other Party<br/>Taxpayer#</th>
+<th>Other Party<br/>Name</th>
+<th>Liability/<br/>API GR</th>
+<th>Gross<br/>Barrels</th>
+<th>Gov Roy<br/>Barrels</th>
+<th>Taxable<br/>Barrels</th>
+<th>Gross<br/>Value</th>
+<th>Roy<br/>Value</th>
+<th>Truck<br/>Cost</th>
+<th>Net<br/>Value</th>
+<th>Type 5/14 <br/> Reduced Rate</th>
+<th>Type 5/14 <br/> Tax Due</th>
+<th>Loc<br/>Num</th>
+<th>Error<br/>Status</th></tr></thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1602</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>10105502396</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/48.0</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0000014</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>10105502396</td>
+<td>212/NO</td>
+<td>011</td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/48.0</td>
+<td class="rjust">130</td>
+<td class="rjust">0</td>
+<td class="rjust">130</td>
+<td class="rjust">$4,159.90</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$3,119.93</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0000444</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1603</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>10105502396</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/47.0</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0000015</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>10105502396</td>
+<td>212/NO</td>
+<td>011</td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/47.0</td>
+<td class="rjust">91</td>
+<td class="rjust">0</td>
+<td class="rjust">91</td>
+<td class="rjust">$3,604.01</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,802.01</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0000484</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1605</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/46.1</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004750</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>011</td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/46.1</td>
+<td class="rjust">110</td>
+<td class="rjust">0</td>
+<td class="rjust">110</td>
+<td class="rjust">$5,180.38</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$3,885.28</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0006323</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1607</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/46.0</td>
+<td class="rjust">115</td>
+<td class="rjust">0</td>
+<td class="rjust">115</td>
+<td class="rjust">$5,245.45</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$5,245.45</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004806</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1609</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/45.2</td>
+<td class="rjust">112</td>
+<td class="rjust">0</td>
+<td class="rjust">112</td>
+<td class="rjust">$5,062.77</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$5,062.77</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004615</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1611</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/45.3</td>
+<td class="rjust">118</td>
+<td class="rjust">0</td>
+<td class="rjust">118</td>
+<td class="rjust">$5,426.41</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$5,426.41</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004436</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1703</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/43.1</td>
+<td class="rjust">172</td>
+<td class="rjust">0</td>
+<td class="rjust">172</td>
+<td class="rjust">$8,514.38</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$8,514.38</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004503</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1705</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/43.8</td>
+<td class="rjust">127</td>
+<td class="rjust">0</td>
+<td class="rjust">127</td>
+<td class="rjust">$6,115.91</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$6,115.91</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004425</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1707</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/44.1</td>
+<td class="rjust">106</td>
+<td class="rjust">0</td>
+<td class="rjust">106</td>
+<td class="rjust">$4,893.09</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$4,893.09</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004388</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1709</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/43.1</td>
+<td class="rjust">11,218</td>
+<td class="rjust">0</td>
+<td class="rjust">11,218</td>
+<td class="rjust">$569,927.67</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$569,927.67</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002390</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/43.8</td>
+<td class="rjust">158</td>
+<td class="rjust">0</td>
+<td class="rjust">158</td>
+<td class="rjust">$7,720.77</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$7,720.77</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004269</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1710</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/43.7</td>
+<td class="rjust">42,220</td>
+<td class="rjust">0</td>
+<td class="rjust">42,220</td>
+<td class="rjust">$2,283,953.37</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$2,283,953.37</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002454</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1711</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/44.2</td>
+<td class="rjust">36,609</td>
+<td class="rjust">0</td>
+<td class="rjust">36,609</td>
+<td class="rjust">$2,209,879.31</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$2,209,879.31</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002508</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/44.5</td>
+<td class="rjust">126</td>
+<td class="rjust">0</td>
+<td class="rjust">126</td>
+<td class="rjust">$7,063.08</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$7,063.08</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004307</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1712</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/43.1</td>
+<td class="rjust">95,648</td>
+<td class="rjust">0</td>
+<td class="rjust">95,648</td>
+<td class="rjust">$5,929,435.18</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$5,929,435.18</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002423</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1801</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/44.0</td>
+<td class="rjust">67,832</td>
+<td class="rjust">0</td>
+<td class="rjust">67,832</td>
+<td class="rjust">$4,553,813.55</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$4,553,813.55</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002505</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/45.7</td>
+<td class="rjust">135</td>
+<td class="rjust">0</td>
+<td class="rjust">135</td>
+<td class="rjust">$8,535.27</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$8,535.27</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004304</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1802</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/42.8</td>
+<td class="rjust">52,595</td>
+<td class="rjust">0</td>
+<td class="rjust">52,595</td>
+<td class="rjust">$3,410,197.20</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$3,410,197.20</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002477</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1803</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/43.8</td>
+<td class="rjust">46,617</td>
+<td class="rjust">0</td>
+<td class="rjust">46,617</td>
+<td class="rjust">$2,959,586.25</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$2,959,586.25</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002530</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1804</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/46.0</td>
+<td class="rjust">25,173</td>
+<td class="rjust">0</td>
+<td class="rjust">25,173</td>
+<td class="rjust">$1,682,954.97</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,682,954.97</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002414</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/46.4</td>
+<td class="rjust">126</td>
+<td class="rjust">0</td>
+<td class="rjust">126</td>
+<td class="rjust">$8,352.04</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$8,352.04</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004269</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1805</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/41.4</td>
+<td class="rjust">24,014</td>
+<td class="rjust">0</td>
+<td class="rjust">24,014</td>
+<td class="rjust">$1,700,732.25</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,700,732.25</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0002481</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1806</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/42.1</td>
+<td class="rjust">24,868</td>
+<td class="rjust">0</td>
+<td class="rjust">24,868</td>
+<td class="rjust">$1,737,611.93</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,737,611.93</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001103</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.1</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">0</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0002431</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1807</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115245517</td>
+<td>BLACKBRUSH OIL & GAS, L.P.                        </td>
+<td>YES/41.8</td>
+<td class="rjust">5,635</td>
+<td class="rjust">0</td>
+<td class="rjust">5,635</td>
+<td class="rjust">$425,095.71</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$425,095.71</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001128</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/45.0</td>
+<td class="rjust">20,668</td>
+<td class="rjust">0</td>
+<td class="rjust">20,668</td>
+<td class="rjust">$1,570,421.26</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,570,421.26</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0002501</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/43.7</td>
+<td class="rjust">173</td>
+<td class="rjust">0</td>
+<td class="rjust">173</td>
+<td class="rjust">$12,242.27</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$12,242.27</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0004148</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1808</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.5</td>
+<td class="rjust">203,514</td>
+<td class="rjust">0</td>
+<td class="rjust">203,514</td>
+<td class="rjust">$14,124,462.06</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$14,124,462.06</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001116</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1809</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.7</td>
+<td class="rjust">169,949</td>
+<td class="rjust">0</td>
+<td class="rjust">169,949</td>
+<td class="rjust">$12,378,338.73</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$12,378,338.73</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001125</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/45.0</td>
+<td class="rjust">128</td>
+<td class="rjust">0</td>
+<td class="rjust">128</td>
+<td class="rjust">$8,958.88</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$8,958.88</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0003909</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1810</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/45.7</td>
+<td class="rjust">123,536</td>
+<td class="rjust">0</td>
+<td class="rjust">123,536</td>
+<td class="rjust">$9,266,624.06</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$9,266,624.06</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001044</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1811</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.6</td>
+<td class="rjust">27,308</td>
+<td class="rjust">0</td>
+<td class="rjust">27,308</td>
+<td class="rjust">$1,697,845.95</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,697,845.95</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001079</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1812</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/43.6</td>
+<td class="rjust">79,388</td>
+<td class="rjust">0</td>
+<td class="rjust">79,388</td>
+<td class="rjust">$4,152,175.60</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$4,152,175.60</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001107</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/47.2</td>
+<td class="rjust">131</td>
+<td class="rjust">0</td>
+<td class="rjust">131</td>
+<td class="rjust">$6,401.94</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$6,401.94</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0003987</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1901</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.4</td>
+<td class="rjust">21,812</td>
+<td class="rjust">0</td>
+<td class="rjust">21,812</td>
+<td class="rjust">$1,177,656.12</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,177,656.12</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001142</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1902</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/44.5</td>
+<td class="rjust">19,789</td>
+<td class="rjust">0</td>
+<td class="rjust">19,789</td>
+<td class="rjust">$1,127,303.47</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,127,303.47</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001083</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/47.8</td>
+<td class="rjust">159</td>
+<td class="rjust">0</td>
+<td class="rjust">159</td>
+<td class="rjust">$8,742.75</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$8,742.75</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0003881</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1903</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/44.0</td>
+<td class="rjust">17,330</td>
+<td class="rjust">0</td>
+<td class="rjust">17,330</td>
+<td class="rjust">$1,061,489.96</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,061,489.96</td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td>0001164</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1904</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.3</td>
+<td class="rjust">15,909</td>
+<td class="rjust">0</td>
+<td class="rjust">15,909</td>
+<td class="rjust">$1,069,003.50</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$1,069,003.50</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0002606</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1905</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/45.0</td>
+<td class="rjust">8,734</td>
+<td class="rjust">0</td>
+<td class="rjust">8,734</td>
+<td class="rjust">$554,491.96</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$554,491.96</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001122</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/47.1</td>
+<td class="rjust">118</td>
+<td class="rjust">0</td>
+<td class="rjust">118</td>
+<td class="rjust">$7,161.71</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$7,161.71</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0003961</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1906</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.3</td>
+<td class="rjust">15,867</td>
+<td class="rjust">0</td>
+<td class="rjust">15,866</td>
+<td class="rjust">$937,788.97</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$937,788.97</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001051</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1907</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/44.0</td>
+<td class="rjust">13,431</td>
+<td class="rjust">0</td>
+<td class="rjust">13,431</td>
+<td class="rjust">$816,267.12</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$816,267.12</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001123</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/47.1</td>
+<td class="rjust">134</td>
+<td class="rjust">0</td>
+<td class="rjust">134</td>
+<td class="rjust">$7,750.41</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$7,750.41</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0004033</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1908</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/42.4</td>
+<td class="rjust">12,864</td>
+<td class="rjust">0</td>
+<td class="rjust">12,864</td>
+<td class="rjust">$713,448.18</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$713,448.18</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001145</td>
+<td>NO</td></tr>
+<tr class="even">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1909</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="odd">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/43.2</td>
+<td class="rjust">11,384</td>
+<td class="rjust">0</td>
+<td class="rjust">11,384</td>
+<td class="rjust">$644,928.59</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$644,928.59</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001163</td>
+<td>NO</td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605871155</td>
+<td>212/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>18304145511</td>
+<td>JOHN LINDER OPERATING COMPANY, L.L.C.             </td>
+<td>YES/46.4</td>
+<td class="rjust">114</td>
+<td class="rjust">0</td>
+<td class="rjust">114</td>
+<td class="rjust">$6,533.50</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$6,533.50</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0003962</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1910</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/43.8</td>
+<td class="rjust">11,231</td>
+<td class="rjust">0</td>
+<td class="rjust">11,231</td>
+<td class="rjust">$600,298.59</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$600,298.59</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001194</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1911</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/46.3</td>
+<td class="rjust">9,722</td>
+<td class="rjust">0</td>
+<td class="rjust">9,722</td>
+<td class="rjust">$547,912.72</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$547,912.72</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001220</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 1912</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/44.0</td>
+<td class="rjust">9,815</td>
+<td class="rjust">0</td>
+<td class="rjust">9,815</td>
+<td class="rjust">$586,164.76</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$586,164.76</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001362</td>
+<td>NO</td></tr>
+<tr class="odd">
+<td></td>
+<td><span style="font-weight:bold;  white-space:nowrap;">Period: 2001</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td class="rjust"></td>
+<td></td>
+<td></td></tr>
+<tr class="even">
+<td>Pur</td>
+<td>17605805088</td>
+<td>128/NO</td>
+<td>   </td>
+<td>   </td>
+<td>   </td>
+<td></td>
+<td> </td>
+<td>14115870413</td>
+<td>BLACKBRUSH O & G, LLC                             </td>
+<td>YES/39.2</td>
+<td class="rjust">10,029</td>
+<td class="rjust">0</td>
+<td class="rjust">10,029</td>
+<td class="rjust">$576,968.71</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$0.00</td>
+<td class="rjust">$576,968.71</td>
+<td class="rjust">0.000</td>
+<td class="rjust">$0.00</td>
+<td>0001273</td>
+<td>NO</td></tr></tbody></table>  
+	
+
+
+					</div>
+				</td>
+			<!-- Messages/Content Ends Here -->
+			</tr>
+		</table>
+	</div>
+	<!-- Menu and Content END Here -->
+	
+	<!-- BEGIN footer -->
+		<!-- START WOSG FOOTER -->
+<div id="wosgfooter" style="text-align: center; width: 100%; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: .8em; line-height: 1.6em;">
+	<br />
+	<div id="wosgfooterTop" style="float: left; padding: 0; margin: 0; background-color: #ccd4ca; width: 100%; color: #666666;">
+		<ul style="list-style: none; width: 100%; padding: 0; margin: 0;">
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="http://www.texas.gov/" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">texas.gov</a>
+			</li>
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="http://www.tsl.state.tx.us/trail/" style="padding: 0 5px 0 5px; margin: 0; color: #333333; text-decoration: underline;">Texas Records and Information Locator (TRAIL)</a>
+			</li>
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="http://publishingext.dir.texas.gov/portal/internal/resources/DocumentLibrary/State%20Website%20Linking%20and%20Privacy%20Policy.pdf" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">State Link Policy</a>
+			</li>
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="http://www.texashomelandsecurity.com/" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Texas Homeland Security</a>
+			</li>
+			<li class="nondivider" style="display: inline; padding: 0; margin: 0 4px 0 0;">
+				<a href="http://veterans.portal.texas.gov/" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Texas Veterans Portal</a>
+			</li>
+		</ul>
+	</div>
+	<div id="wosgfooterBottom" style="float: left; background-color: #FFFFFF; width: 100%; color: #333333; line-height: 1.4em;">
+		<p style="margin: 5px 0 0 0; padding: 0;">
+			<strong>Glenn Hegar</strong>, Texas Comptroller&nbsp;&nbsp;&#8226; <a href="https://comptroller.texas.gov" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Home</a> &#8226; <a href="https://comptroller.texas.gov/about/contact/" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Contact Us</a>
+		</p>
+      	<ul style="list-style: none; width: 100%; padding: 0; margin: 0;">
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="https://comptroller.texas.gov/about/policies/privacy.php" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Privacy and Security Policy</a>
+			</li>
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="https://comptroller.texas.gov/about/policies/accessibility.php" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Accessibility Policy</a>
+			</li>
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="https://comptroller.texas.gov/about/policies/links.php" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Link  Policy</a>
+			</li>
+			<li class="divider" style="display: inline; padding: 0; margin: 0 4px 0 0; border-right: 1px solid #999999;">
+				<a href="https://comptroller.texas.gov/about/policies/public-information-act.php" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Public Information Act</a>
+			</li>
+			<li style="display: inline; padding: 0; margin: 0 4px 0 0;">			
+				<a href="https://www.comptroller.texas.gov/about/contact/customer-service.php" style="padding: 0 5px 0 5px; margin: 0; text-decoration: underline; color: #333333;">Compact with Texans</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- END WOSG FOOTER -->
+	<!-- END footer -->
+	
+</body>
+</html>
+
+
+

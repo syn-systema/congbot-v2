@@ -1,0 +1,95 @@
+Technical Report: Development of Cong Bot Prototype for Automated Lease and Permit Search
+
+Date: April 15, 2025
+Author: CPS
+Prepared for: INTERNAL
+
+1. Introduction
+This document outlines the technical development process, challenges encountered, and solutions implemented for the Cong Bot Prototype, a Streamlit-based application designed to automate searches for drilling permits and lease numbers on the Texas Comptroller of Public Accounts website (https://mycpa.cpa.state.tx.us/cong/Index.jsp). The primary objective was to bypass session expiration and reCAPTCHA challenges to enable seamless public data access.
+
+2. Project Overview
+2.1 Objective
+The goal was to create a web scraping tool using Selenium WebDriver within a Streamlit interface to perform automated searches for drilling permits and lease numbers without requiring user login, while overcoming website security measures such as session management and invisible reCAPTCHA.
+
+2.2 Technologies Used
+- Python 3.9
+- Streamlit: For creating the user interface.
+- Selenium WebDriver (version >= 4.6.0): For browser automation.
+- Pandas: For data handling and display.
+- Docker: For containerized deployment.
+
+3. Development Process
+3.1 Initial Setup
+The project began with setting up a basic Streamlit application integrated with Selenium WebDriver. The application was containerized using Docker to ensure consistent deployment environments. Initial attempts to access search pages directly resulted in 'Session Expired' errors, indicating the need for proper session initialization.
+
+3.2 Session Management Challenge
+Analysis of the website revealed that direct access to search URLs (e.g., https://mycpa.cpa.state.tx.us/cong/leaseNumberSearchForward.do) triggered session expiration messages. This behavior suggested that the site required navigation through the main page to establish a valid session context.
+
+3.3 Navigation Flow Implementation
+To address the session issue, the application was modified to mimic human user behavior:
+- Start at the main page (https://mycpa.cpa.state.tx.us/cong/Index.jsp) to initialize a session.
+- Navigate to the respective search pages by programmatically clicking on links ('By Drilling Permit' or 'By Lease Number').
+- Use WebDriverWait to ensure elements were interactable before interaction, preventing premature actions that could disrupt session establishment.
+Initially, this approach was applied only to the drilling permit search, which resolved the session expiration for that functionality. However, it was later discovered that the same issue persisted for the permit search due to direct URL navigation in the code.
+
+3.4 reCAPTCHA Challenge with Lease Number Search
+Despite the navigation flow implementation, the lease number search continued to fail. Examination of the page source revealed the presence of an invisible reCAPTCHA challenge (identified by the 'grecaptcha-badge' element). This security measure was likely triggered due to automated behavior detection, even with the correct navigation flow.
+
+3.5 Enhanced Waiting and Detection Strategy
+To overcome the reCAPTCHA challenge for lease number searches, the following enhancements were made to the application:
+- Extended wait times after page navigation (increased from 2 to 8 seconds) to allow dynamic content and security checks to complete.
+- Added explicit checks for the presence of reCAPTCHA elements, logging their detection and capturing screenshots for debugging.
+- Implemented longer WebDriverWait timeouts (up to 30 seconds) for form elements to become interactable, ensuring the page was fully loaded.
+- Added error handling for navigation failures, with detailed logging and screenshot captures to aid in troubleshooting.
+These modifications proved successful, as the extended wait times and readiness checks allowed the application to bypass or wait out the reCAPTCHA challenge, enabling successful lease number searches.
+
+3.6 Permit Search Session Issue and Resolution
+After successfully resolving the issues with the lease number search, it was observed that the permit search functionality began encountering the same session expiration error. Upon review of the codebase, it was identified that the natural navigation flow implemented for the lease search had not been applied to the permit search function. The permit search was still navigating directly to the search URL, bypassing the session initialization step.
+
+To resolve this, the permit search function was updated to mirror the lease search approach:
+- Navigate to the main page first to establish a session.
+- Click on the 'By Drilling Permit' link to reach the search page.
+- Implement extended wait times and reCAPTCHA detection logic similar to the lease search.
+This update successfully resolved the session expiration issue for the permit search, ensuring both search functionalities operated without triggering session errors.
+
+4. Technical Implementation Details
+4.1 Selenium Configuration
+- User-Agent Spoofing: The browser's user-agent was modified to mimic a standard Chrome browser, reducing the likelihood of bot detection.
+- WebDriver Property Modification: The 'navigator.webdriver' property was set to 'undefined' via JavaScript execution to further mask automation.
+- Headless Mode: Initially considered, but ultimately run in non-headless mode within Docker to mimic real user interaction more closely.
+
+4.2 Navigation Flow in Code
+- Main Page Navigation: driver.get('https://mycpa.cpa.state.tx.us/cong/Index.jsp') followed by a 3-second wait.
+- Link Clicking: WebDriverWait(driver, 20).until(EC.element_to_be_clickable(By.XPATH)) to locate and click navigation links.
+- Form Interaction: Explicit waits for input fields to be clickable before entering data or submitting forms.
+
+4.3 Docker Deployment
+- A Dockerfile based on python:3.9-slim was used, installing necessary dependencies (Chrome, chromedriver).
+- The deploy.sh script automated image building, container stopping/starting, ensuring quick redeployment for testing iterations.
+
+5. Challenges and Solutions
+5.1 Session Expiration
+- Challenge: Direct URL access led to session expired messages.
+- Solution: Implemented natural navigation flow starting from the main page, simulating user clicks to establish valid sessions. This was initially applied to lease search and later extended to permit search after identifying the oversight.
+
+5.2 Invisible reCAPTCHA
+- Challenge: Automated behavior triggered reCAPTCHA on lease search page, blocking form submission.
+- Solution: Extended wait times and added detection logic to wait out or bypass the challenge, leveraging human-like interaction timing.
+
+6. Results
+After iterative updates, both drilling permit and lease number searches were successfully automated. The application can now:
+- Navigate the website as a human user would, avoiding session issues for both permit and lease searches.
+- Handle or bypass invisible reCAPTCHA challenges through strategic waiting and interaction timing.
+- Display search results in a user-friendly Streamlit interface.
+
+7. Future Enhancements
+- Implement more sophisticated reCAPTCHA bypassing techniques if detection becomes stricter (e.g., using third-party solving services).
+- Add retry mechanisms for transient failures.
+- Enhance data extraction to parse and store results in structured formats (CSV, database).
+- Optimize wait times dynamically based on page load events rather than static delays.
+
+8. Conclusion
+The Cong Bot Prototype development process demonstrated the importance of mimicking human interaction patterns when automating web interactions on sites with security measures. By addressing session management through navigation flow and overcoming reCAPTCHA with strategic timing, the application achieved its goal of automating public data searches. This project serves as a foundation for further enhancements in web scraping and automation within regulatory or public data domains.
+
+
+[End of Document]
