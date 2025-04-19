@@ -15,25 +15,22 @@ import pandas as pd
 # Logging setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-SCREENSHOT_DIR = "/app/screenshots"
-os.makedirs(SCREENSHOT_DIR, exist_ok=True)
 
-# Helper function to save debug files
-def save_debug_files(driver, error_prefix="error"):
+# Helper function to log page source (without saving files)
+def log_page_info(driver, prefix="debug"):
+    if driver is None:
+        logger.warning("Cannot log page info: driver is None")
+        return
+        
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    screenshot_path = os.path.join(SCREENSHOT_DIR, f"{error_prefix}_{timestamp}.png")
-    html_path = os.path.join(SCREENSHOT_DIR, f"{error_prefix}_{timestamp}.html")
+    
     try:
-        driver.save_screenshot(screenshot_path)
-        logger.info(f"Screenshot saved to: {screenshot_path}")
+        current_url = driver.current_url
+        page_title = driver.title
+        logger.info(f"{prefix} URL: {current_url}")
+        logger.info(f"{prefix} Title: {page_title}")
     except Exception as e:
-        logger.error(f"Failed to save screenshot: {e}")
-    try:
-        with open(html_path, "w", encoding="utf-8") as f:
-            f.write(driver.page_source)
-        logger.info(f"Page source saved to: {html_path}")
-    except Exception as e:
-        logger.error(f"Failed to save page source: {e}")
+        logger.error(f"Failed to log page info: {e}")
 
 # Function to access Lease Drop - Crude Oil Inquiry
 def access_lease_drop(identifier_type, identifier_value, beg_period, end_period):
@@ -74,9 +71,7 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
         driver.get("https://mycpa.cpa.state.tx.us/cong/Index.jsp")
         time.sleep(5) # Allow more time for session setup
         logger.info("Main index page loaded.")
-        save_debug_files(driver, "main_index_page")
-        cookies_after_index = driver.get_cookies()
-        logger.info(f"Cookies after Index.jsp: {cookies_after_index}")
+        log_page_info(driver, "main_index_page")
         
         # Manually set a cookie to indicate cookie support
         driver.execute_script("document.cookie='cookiesEnabled=true; path=/;'")
@@ -86,9 +81,7 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
         driver.get("https://mycpa.cpa.state.tx.us/cong/loginForward.do?phase=check")
         time.sleep(5)  # Allow time for check page processing
         logger.info("Check page loaded.")
-        save_debug_files(driver, "check_page")
-        cookies_after_check = driver.get_cookies()
-        logger.info(f"Cookies after check page: {cookies_after_check}")
+        log_page_info(driver, "check_page")
 
         # Step 3: Check for cookie error message on the check page itself
         if "Cookies are required" in driver.page_source or "Cookies are required" in driver.title:
@@ -115,7 +108,7 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
                 driver.get("https://mycpa.cpa.state.tx.us/cong/loginForward.do?phase=check")
                 time.sleep(5)
                 
-                save_debug_files(driver, f"cookie_recovery_attempt_{attempt+1}")
+                log_page_info(driver, f"cookie_recovery_attempt_{attempt+1}")
                 
                 # Check if we've resolved the cookie issue
                 if "Cookies are required" not in driver.page_source and "Cookies are required" not in driver.title:
@@ -157,7 +150,7 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
         
         if "Lease Drop - Crude Oil" in driver.title or "reportLeaseDropCOForward.do" in driver.current_url:
             logger.info("Successfully reached Lease Drop - Crude Oil page")
-            save_debug_files(driver, "success_lease_drop_page")
+            log_page_info(driver, "success_lease_drop_page")
 
             # --- Find and fill the form ---            
             try:
@@ -166,8 +159,8 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
                 logger.info(f"Page title: {driver.title}")
                 
                 # Log the page source to help debug form elements
-                logger.info("Saving page source for debugging form elements")
-                save_debug_files(driver, "before_form_interaction")
+                logger.info("Logging page source for debugging form elements")
+                log_page_info(driver, "before_form_interaction")
                 
                 # Print all form elements on the page for debugging
                 try:
@@ -379,8 +372,8 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
                 driver.execute_script("arguments[0].scrollIntoView(true);", submit_button)
                 time.sleep(0.5)
                 
-                # Take a screenshot before clicking
-                save_debug_files(driver, "before_submit_click")
+                # Log page info before clicking
+                log_page_info(driver, "before_submit_click")
                 
                 submit_button.click()
                 logger.info("Submit button clicked")
@@ -389,8 +382,8 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
                 # A more robust wait would look for a specific element on the results page
                 logger.info("Waiting after submission...")
                 time.sleep(10) 
-                logger.info("Form submitted. Saving state and retrieving page source.")
-                save_debug_files(driver, "after_form_submission")
+                logger.info("Form submitted. Logging page source.")
+                log_page_info(driver, "after_form_submission")
 
                 results_html = driver.page_source
                 logger.info("Returning page source after submission.")
@@ -398,28 +391,28 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
 
             except TimeoutException:
                 logger.error("Failed to find one or more form elements within the timeout period.")
-                save_debug_files(driver, "error_finding_form_elements")
+                log_page_info(driver, "error_finding_form_elements")
                 return None, "Error: Could not find form elements. Check element names/XPATH."
             except Exception as e:
                 logger.error(f"An error occurred during form interaction: {e}")
-                save_debug_files(driver, "error_during_form_interaction")
+                log_page_info(driver, "error_during_form_interaction")
                 return None, f"An error occurred during form interaction: {e}"
 
         else:
              # Final check for cookie error page
             if "Cookies are required" in driver.page_source or "Cookies are required" in driver.title:
                  logger.error("Failed to reach target page; landed on cookie error page.")
-                 save_debug_files(driver, "final_cookie_error")
+                 log_page_info(driver, "final_cookie_error")
                  return None, "Navigation failed, ended up on 'Cookies are required' page. Please try again later."
             else:
                  logger.error("Failed to reach Lease Drop - Crude Oil page. Unknown state.")
-                 save_debug_files(driver, "navigation_failure_unknown")
+                 log_page_info(driver, "navigation_failure_unknown")
                  return None, "Failed to reach Lease Drop - Crude Oil page after navigation attempts."
 
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}")
         logger.error(traceback.format_exc()) # Log full traceback
-        save_debug_files(driver, "general_error")
+        log_page_info(driver, "general_error")
         return None, f"General error during access attempt: {str(e)}"
     finally:
         logger.info("Closing WebDriver.")
