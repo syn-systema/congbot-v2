@@ -68,5 +68,4 @@ If you encounter issues with the web scraping:
 This project is proprietary and confidential.
 
 ## Author
-
-Created for Texas Comptroller Lease Data Analysis
+CPS
