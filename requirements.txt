@@ -2,3 +2,5 @@ streamlit
 selenium
 pandas
 lxml
+google-generativeai
+streamlit-chat

@@ -11,6 +11,7 @@ from datetime import datetime
 import traceback
 import streamlit as st
 import pandas as pd
+from gemini_chat import render_chat_ui
 
 # Logging setup
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -429,163 +430,164 @@ Investigate if there has been a significant decrease or cessation ("drop")
 in reported crude oil production for a specific Texas oil lease within a defined time period.
 """)
 
-# Create a container for the form
-form_container = st.container()
+# Create tabs for different functionality
+tab1, tab2 = st.tabs(["Data Retrieval", "AI Assistant"])
 
-with form_container:
-    st.markdown("### Input Parameters")
+with tab1:
+    st.subheader("Input Parameters")
     
-    # Create two columns for the identifier section
+    # Create two columns for the form
     col1, col2 = st.columns(2)
-
+    
     with col1:
-        st.markdown("**Lease Number:**")
-        lease_num_input = st.text_input(
-            "(6 digits)", 
-            max_chars=6,
-            value="011457", # Default example
-            key="lease_number"
-        )
-
-    with col2:
-        st.markdown("**OR**")
-        st.markdown("**Drilling Permit Number:**")
-        drilling_permit_input = st.text_input(
-            "(6 digits)",
-            max_chars=6,
-            key="drilling_permit"
-        )
-
-    # Create two columns for the period section
-    col3, col4 = st.columns(2)
-
-    with col3:
-        st.markdown("**Beg Period:**")
-        beg_period_input = st.text_input(
-            "(yymm or yy)",
-            max_chars=4,
-            value="2201", # Default example
-            key="beg_period"
-        )
-
-    with col4:
-        st.markdown("**End Period:**")
-        end_period_input = st.text_input(
-            "(yymm or yy)",
-            max_chars=4,
-            value="2301", # Default example
-            key="end_period"
-        )
-
-    # Add a divider
-    st.markdown("---")
-
-# Validation and submission
-if st.button("Get Lease Drop Data", key="submit_button"):
-    # Basic validation
-    validation_error = False
-    
-    # Check that exactly one identifier is provided
-    if (lease_num_input and drilling_permit_input) or (not lease_num_input and not drilling_permit_input):
-        st.error("Please provide EITHER Lease Number OR Drilling Permit Number (not both, not neither).")
-        validation_error = True
-    
-    # Check that begin and end periods are provided
-    if not beg_period_input or not end_period_input:
-        st.error("Both Begin Period and End Period are required.")
-        validation_error = True
-    
-    if not validation_error:
-        # Determine which identifier to use
-        identifier_type = "Lease Number" if lease_num_input else "Drilling Permit Number"
-        identifier_value = lease_num_input if lease_num_input else drilling_permit_input
+        st.markdown("Lease Number:")
+        st.markdown("(6 digits)")
+        lease_num_input = st.text_input("", key="lease_num", placeholder="e.g., 123456")
         
-        with st.spinner(f"Accessing Lease Drop data for {identifier_type}: {identifier_value}... Please wait. This may take up to a minute."):
-            # Call the function with the appropriate identifier
-            html_content, error_message = access_lease_drop(identifier_type, identifier_value, beg_period_input, end_period_input)
+        st.markdown("Beg Period:")
+        st.markdown("(yymm or yy)")
+        beg_period_input = st.text_input("", key="beg_period", placeholder="e.g., 2201")
+    
+    with col2:
+        st.markdown("OR")
+        st.markdown("Drilling Permit Number:")
+        st.markdown("(6 digits)")
+        drilling_permit_input = st.text_input("", key="drilling_permit", placeholder="e.g., 123456")
+        
+        st.markdown("End Period:")
+        st.markdown("(yymm or yy)")
+        end_period_input = st.text_input("", key="end_period", placeholder="e.g., 2301")
+    
+    if st.button("Get Lease Drop Data", key="submit_button"):
+        # Basic validation
+        validation_error = False
+        
+        # Check that exactly one identifier is provided
+        if (not lease_num_input and not drilling_permit_input) or (lease_num_input and drilling_permit_input):
+            st.error("Please provide either a Lease Number OR a Drilling Permit Number, not both or neither.")
+            validation_error = True
+        
+        # Check that both period fields are filled
+        if not beg_period_input or not end_period_input:
+            st.error("Both Begin Period and End Period must be provided.")
+            validation_error = True
+        
+        if not validation_error:
+            # Determine which identifier to use
+            identifier_type = "Lease Number" if lease_num_input else "Drilling Permit Number"
+            identifier_value = lease_num_input if lease_num_input else drilling_permit_input
+            
+            with st.spinner(f"Accessing Lease Drop data for {identifier_type}: {identifier_value}... Please wait. This may take up to a minute."):
+                # Call the function with the appropriate identifier
+                html_content, error_message = access_lease_drop(identifier_type, identifier_value, beg_period_input, end_period_input)
 
-            if error_message:
-                st.error(f"Failed to retrieve data: {error_message}")
-            elif html_content:
-                st.success("Data retrieval attempt finished. Parsing results...")
-                try:
-                    # Parse the HTML table
+                if error_message:
+                    st.error(f"Error: {error_message}")
+                elif html_content:
+                    st.success("Data retrieval attempt finished. Parsing results...")
                     try:
-                        # Try to use lxml parser first (faster and more robust)
-                        tables = pd.read_html(html_content, flavor='lxml')
-                        if tables:
-                            df = tables[0]
-                            st.success("Data retrieved successfully!")
-                            
-                            # Process the dataframe
-                            # Remove rows where all columns are NaN
-                            df = df.dropna(how='all')
-                            
-                            # Display the data
-                            st.subheader("Lease Drop Data")
-                            st.dataframe(df)
-                            
-                            # Calculate and display summary statistics
-                            if 'Gross Barrels' in df.columns:
-                                numeric_cols = ['Gross Barrels', 'Taxable Barrels', 'Gross Value', 'Net Value']
-                                summary_df = df[numeric_cols].apply(pd.to_numeric, errors='coerce').describe()
-                                st.subheader("Summary Statistics")
-                                st.dataframe(summary_df)
-                                
-                                # Calculate total barrels
-                                total_barrels = df['Gross Barrels'].apply(pd.to_numeric, errors='coerce').sum()
-                                st.metric("Total Gross Barrels", f"{total_barrels:,.0f}")
-                                
-                                # Visualize the data
-                                st.subheader("Production Over Time")
-                                try:
-                                    # Extract period information
-                                    periods = []
-                                    current_period = None
-                                    for _, row in df.iterrows():
-                                        if isinstance(row[1], str) and 'Period:' in row[1]:
-                                            current_period = row[1].replace('Period:', '').strip()
-                                        elif current_period and pd.notna(row['Gross Barrels']):
-                                            periods.append((current_period, row['Gross Barrels']))
-                                    
-                                    if periods:
-                                        period_df = pd.DataFrame(periods, columns=['Period', 'Gross Barrels'])
-                                        period_df['Gross Barrels'] = pd.to_numeric(period_df['Gross Barrels'], errors='coerce')
-                                        st.bar_chart(period_df.set_index('Period'))
-                                except Exception as e:
-                                    st.warning(f"Could not generate chart: {str(e)}")
-                        else:
-                            st.error("No tables found in the response")
-                            st.text("Raw HTML Results (No Tables Found):")
-                            st.code(html_content[:1000] + "..." if len(html_content) > 1000 else html_content)
-                    except ImportError:
-                        st.error("Missing optional dependency 'lxml'. Install using: pip install lxml")
-                        # Fallback to html5lib
+                        # Parse the HTML table
                         try:
-                            tables = pd.read_html(html_content, flavor='html5lib')
-                            if tables:
-                                df = tables[0]
-                                st.success("Data retrieved successfully (using html5lib fallback)!")
-                                st.dataframe(df)
+                            tables = pd.read_html(html_content)
+                            if len(tables) > 0:
+                                # Store the data in session state for the AI tab
+                                st.session_state.lease_data = tables[0]
+                                
+                                # Display the table
+                                st.subheader("Lease Drop Data:")
+                                st.dataframe(tables[0])
+                                
+                                # Calculate and display summary statistics
+                                if len(tables[0]) > 0:
+                                    st.subheader("Summary Statistics:")
+                                    
+                                    # Try to find and analyze the production column
+                                    production_col = None
+                                    for col in tables[0].columns:
+                                        if "CRUDE" in str(col).upper() and "OIL" in str(col).upper():
+                                            production_col = col
+                                            break
+                                    
+                                    if production_col:
+                                        # Convert to numeric, coercing errors to NaN
+                                        tables[0][production_col] = pd.to_numeric(tables[0][production_col], errors='coerce')
+                                        
+                                        # Calculate statistics
+                                        stats_df = pd.DataFrame({
+                                            'Statistic': ['Count', 'Mean', 'Median', 'Min', 'Max', 'Std Dev'],
+                                            'Value': [
+                                                tables[0][production_col].count(),
+                                                tables[0][production_col].mean(),
+                                                tables[0][production_col].median(),
+                                                tables[0][production_col].min(),
+                                                tables[0][production_col].max(),
+                                                tables[0][production_col].std()
+                                            ]
+                                        })
+                                        
+                                        st.dataframe(stats_df)
+                                        
+                                        # Check for lease drop
+                                        if len(tables[0]) >= 2:
+                                            # Sort by date if possible
+                                            date_col = None
+                                            for col in tables[0].columns:
+                                                if "DATE" in str(col).upper() or "PERIOD" in str(col).upper():
+                                                    date_col = col
+                                                    break
+                                            
+                                            if date_col:
+                                                try:
+                                                    # Sort by date
+                                                    tables[0] = tables[0].sort_values(by=date_col)
+                                                    
+                                                    # Get first and last production values
+                                                    first_production = tables[0][production_col].iloc[0]
+                                                    last_production = tables[0][production_col].iloc[-1]
+                                                    
+                                                    # Calculate percentage change
+                                                    if first_production > 0:
+                                                        pct_change = ((last_production - first_production) / first_production) * 100
+                                                        
+                                                        if pct_change <= -50:
+                                                            st.warning(f"⚠️ Significant lease drop detected! Production decreased by {abs(pct_change):.2f}%")
+                                                        elif pct_change < 0:
+                                                            st.info(f"Production decreased by {abs(pct_change):.2f}%")
+                                                        else:
+                                                            st.success(f"Production increased by {pct_change:.2f}%")
+                                                except Exception as e:
+                                                    logger.error(f"Error analyzing production trend: {e}")
+                                    else:
+                                        st.info("Could not identify crude oil production column for analysis.")
+                                else:
+                                    st.info("No data rows found in the table.")
                             else:
-                                st.error("No tables found in the response")
-                                st.text("Raw HTML Results (No Tables Found):")
-                                st.code(html_content[:1000] + "..." if len(html_content) > 1000 else html_content)
-                        except Exception as e:
-                            st.error(f"Failed to parse HTML table: {str(e)}")
-                            st.text("Raw HTML Results (Parsing Error):")
-                            st.code(html_content[:1000] + "..." if len(html_content) > 1000 else html_content)
-                    except Exception as e:
-                        st.error(f"Failed to parse HTML table: {str(e)}")
-                        st.text("Raw HTML Results (Parsing Error):")
-                        st.code(html_content[:1000] + "..." if len(html_content) > 1000 else html_content)
-                
-                except Exception as parse_error:
-                    logger.error(f"Error parsing HTML table: {parse_error}")
-                    st.error(f"Successfully retrieved HTML, but failed to parse the data table: {parse_error}")
-                    # Show raw HTML on parsing error too
-                    st.subheader("Raw HTML Results (Parsing Error):")
-                    st.text_area("HTML Output", html_content, height=300)
+                                st.warning("No tables found in the HTML content.")
+                                st.subheader("Raw HTML Results:")
+                                st.code(html_content)
+                        except ValueError as ve:
+                            logger.error(f"ValueError parsing HTML table: {ve}")
+                            st.error(f"No tables found in the HTML. The query may have returned no results: {ve}")
+                            st.subheader("Raw HTML Results (No Tables):")
+                            st.code(html_content)
+                    except Exception as parse_error:
+                        logger.error(f"Error parsing HTML table: {parse_error}")
+                        st.error(f"Successfully retrieved HTML, but failed to parse the data table: {parse_error}")
+                        # Show raw HTML on parsing error too
+                        st.subheader("Raw HTML Results (Parsing Error):")
+                        st.code(html_content)
+                else:
+                    st.error("An unknown error occurred. No data or error message returned.")
 
-            else:
-                st.error("An unknown error occurred. No data or error message returned.")
+with tab2:
+    # Check if we have lease data in session state
+    lease_data = st.session_state.get('lease_data', None)
+    
+    if lease_data is not None:
+        render_chat_ui(lease_data)
+    else:
+        st.info("Please retrieve lease data in the 'Data Retrieval' tab first to enable AI assistance.")
+        
+        # Still allow chat without context if user wants to ask general questions
+        if st.button("I just want to chat without lease data context"):
+            render_chat_ui()
