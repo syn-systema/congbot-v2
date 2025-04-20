@@ -35,30 +35,19 @@ def log_page_info(driver, prefix="debug"):
 # Function to access Lease Drop - Crude Oil Inquiry
 def access_lease_drop(identifier_type, identifier_value, beg_period, end_period):
     """
-    Access the Texas Comptroller's website to retrieve lease drop data.
+    Access the Texas Comptroller's website and retrieve lease drop data.
     
     Args:
-        identifier_type (str): Either "Lease Number" or "Drilling Permit Number"
-        identifier_value (str): The value of the identifier
-        beg_period (str): Beginning period in yymm or yy format
-        end_period (str): Ending period in yymm or yy format
+        identifier_type (str): Type of identifier to use ('Lease Number' or 'Drilling Permit Number')
+        identifier_value (str): Value of the identifier
+        beg_period (str): Beginning period in YYMM format
+        end_period (str): Ending period in YYMM format
         
     Returns:
-        tuple: (html_content, error_message, query_info)
-            - html_content: HTML content of the results page if successful, None otherwise
+        tuple: (html_content, error_message)
+            - html_content: HTML content from the Texas Comptroller's website
             - error_message: Error message if unsuccessful, None otherwise
-            - query_info: Dictionary containing query information for database storage
     """
-    # Create query info dictionary for database storage
-    query_info = {
-        "timestamp": datetime.now().isoformat(),
-        "identifier_type": identifier_type,
-        "identifier_value": identifier_value,
-        "beg_period": beg_period,
-        "end_period": end_period,
-        "status": "started"
-    }
-    
     logger.info(f"Starting Lease Drop - Crude Oil Inquiry for {identifier_type}: {identifier_value}, Period: {beg_period}-{end_period}")
     options = Options()
     options.add_argument("--headless")
@@ -143,9 +132,7 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
             # Final check after all recovery attempts
             if "Cookies are required" in driver.page_source or "Cookies are required" in driver.title:
                 logger.error("Cookie error persists even after recovery attempts.")
-                query_info["status"] = "error"
-                query_info["error_message"] = "Cookies are required and could not be enabled. Please try running the application again."
-                return None, "Cookies are required and could not be enabled. Please try running the application again.", query_info
+                return None, "Cookies are required and could not be enabled. Please try running the application again."
         
         # Step 4: Try navigating to the Lease Drop page (prefer direct link click if possible)
         logger.info("Attempting navigation to Lease Drop - Crude Oil page...")
@@ -414,44 +401,33 @@ def access_lease_drop(identifier_type, identifier_value, beg_period, end_period)
 
                 results_html = driver.page_source
                 logger.info("Returning page source after submission.")
-                query_info["status"] = "success"
-                return results_html, None, query_info # Return HTML content, no error
+                return results_html, None # Return HTML content, no error
 
             except TimeoutException:
                 logger.error("Failed to find one or more form elements within the timeout period.")
                 log_page_info(driver, "error_finding_form_elements")
-                query_info["status"] = "error"
-                query_info["error_message"] = "Error: Could not find form elements. Check element names/XPATH."
-                return None, "Error: Could not find form elements. Check element names/XPATH.", query_info
+                return None, "Error: Could not find form elements. Check element names/XPATH."
             except Exception as e:
                 logger.error(f"An error occurred during form interaction: {e}")
                 log_page_info(driver, "error_during_form_interaction")
-                query_info["status"] = "error"
-                query_info["error_message"] = f"An error occurred during form interaction: {e}"
-                return None, f"An error occurred during form interaction: {e}", query_info
+                return None, f"An error occurred during form interaction: {e}"
 
         else:
              # Final check for cookie error page
             if "Cookies are required" in driver.page_source or "Cookies are required" in driver.title:
                  logger.error("Failed to reach target page; landed on cookie error page.")
                  log_page_info(driver, "final_cookie_error")
-                 query_info["status"] = "error"
-                 query_info["error_message"] = "Navigation failed, ended up on 'Cookies are required' page. Please try again later."
-                 return None, "Navigation failed, ended up on 'Cookies are required' page. Please try again later.", query_info
+                 return None, "Navigation failed, ended up on 'Cookies are required' page. Please try again later."
             else:
                  logger.error("Failed to reach Lease Drop - Crude Oil page. Unknown state.")
                  log_page_info(driver, "navigation_failure_unknown")
-                 query_info["status"] = "error"
-                 query_info["error_message"] = "Failed to reach Lease Drop - Crude Oil page after navigation attempts."
-                 return None, "Failed to reach Lease Drop - Crude Oil page after navigation attempts.", query_info
+                 return None, "Failed to reach Lease Drop - Crude Oil page after navigation attempts."
 
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}")
         logger.error(traceback.format_exc()) # Log full traceback
         log_page_info(driver, "general_error")
-        query_info["status"] = "error"
-        query_info["error_message"] = f"General error during access attempt: {str(e)}"
-        return None, f"General error during access attempt: {str(e)}", query_info
+        return None, f"General error during access attempt: {str(e)}"
     finally:
         logger.info("Closing WebDriver.")
         # Ensure driver is quit even if returned earlier
@@ -481,10 +457,39 @@ def process_lease_data(html_content):
             if len(tables) > 0:
                 # Try to find and analyze the production column
                 production_col = None
+                
+                # First try to find a column with "CRUDE OIL"
                 for col in tables[0].columns:
                     if "CRUDE" in str(col).upper() and "OIL" in str(col).upper():
                         production_col = col
                         break
+                
+                # Next try to find a column with "GROSS BARRELS"
+                if production_col is None:
+                    for col in tables[0].columns:
+                        if "GROSS" in str(col).upper() and "BARRELS" in str(col).upper():
+                            production_col = col
+                            break
+                
+                # If not found, try to find columns with just "BARRELS" or "BBL"
+                if production_col is None:
+                    for col in tables[0].columns:
+                        if "BARRELS" in str(col).upper() or "BBL" in str(col).upper():
+                            production_col = col
+                            break
+                
+                # Last resort: look for any numeric column with values that could be production
+                if production_col is None:
+                    for col in tables[0].columns:
+                        # Try to convert to numeric and see if it has reasonable values
+                        try:
+                            numeric_col = pd.to_numeric(tables[0][col], errors='coerce')
+                            # Check if this column has non-zero values and not too many NaNs
+                            if numeric_col.sum() > 0 and numeric_col.count() > len(tables[0]) * 0.5:
+                                production_col = col
+                                break
+                        except:
+                            continue
                 
                 if production_col:
                     # Convert to numeric, coercing errors to NaN
@@ -503,38 +508,66 @@ def process_lease_data(html_content):
                         ]
                     })
                     
+                    # Extract period information from the table
+                    # In the Texas Comptroller's website, the period is often in rows with "Period: YYMM" format
+                    # or in a column with "DATE" or "PERIOD" in the name
+                    date_col = None
+                    
+                    # First try to find a column with "DATE" or "PERIOD" in the name
+                    for col in tables[0].columns:
+                        if "DATE" in str(col).upper() or "PERIOD" in str(col).upper():
+                            date_col = col
+                            break
+                    
+                    # If no date column found, try to extract from "Period: YYMM" format in rows
+                    if date_col is None:
+                        date_col = 'Period'
+                        tables[0][date_col] = None
+                        
+                        # Check if "Primary Taxpayer #" column exists and contains period information
+                        if 'Primary Taxpayer #' in tables[0].columns:
+                            current_period = None
+                            for i, row in tables[0].iterrows():
+                                primary_taxpayer = str(row.get('Primary Taxpayer #', ''))
+                                if 'Period:' in primary_taxpayer:
+                                    # Extract the period (e.g., "Period: 1602" -> "1602")
+                                    current_period = primary_taxpayer.split('Period:')[1].strip()
+                                
+                                # Assign the current period to this row
+                                if current_period:
+                                    tables[0].at[i, date_col] = current_period
+                            
+                            # Remove rows without production data (like period header rows)
+                            tables[0] = tables[0].dropna(subset=[production_col])
+                        else:
+                            # If we can't find period information, return an error
+                            return tables, production_col, None, stats_df, None, "Could not identify date column for analysis"
+                    
                     # Check for lease drop
                     if len(tables[0]) >= 2:
-                        # Sort by date if possible
-                        date_col = None
-                        for col in tables[0].columns:
-                            if "DATE" in str(col).upper() or "PERIOD" in str(col).upper():
-                                date_col = col
-                                break
-                        
-                        if date_col:
-                            try:
-                                # Sort by date
-                                tables[0] = tables[0].sort_values(by=date_col)
-                                
-                                # Get first and last production values
-                                first_production = tables[0][production_col].iloc[0]
-                                last_production = tables[0][production_col].iloc[-1]
+                        try:
+                            # Sort by date
+                            tables[0] = tables[0].sort_values(by=date_col)
+                            
+                            # Filter out rows with zero or NaN production values
+                            non_zero_df = tables[0][tables[0][production_col] > 0].copy()
+                            
+                            if len(non_zero_df) >= 2:
+                                # Get first and last production values from non-zero rows
+                                first_production = non_zero_df[production_col].iloc[0]
+                                last_production = non_zero_df[production_col].iloc[-1]
                                 
                                 # Calculate percentage change
-                                pct_change = None
-                                if first_production > 0:
-                                    pct_change = ((last_production - first_production) / first_production) * 100
-                                    return tables, production_col, date_col, stats_df, pct_change, None
-                                else:
-                                    return tables, production_col, date_col, stats_df, None, "First production value is zero, cannot calculate percentage change"
-                            except Exception as e:
-                                logger.error(f"Error analyzing production trend: {e}")
-                                return tables, production_col, date_col, stats_df, None, f"Error analyzing production trend: {e}"
-                        else:
-                            return tables, production_col, None, stats_df, None, "Could not identify date column for analysis"
+                                pct_change = ((last_production - first_production) / first_production) * 100
+                                return tables, production_col, date_col, stats_df, pct_change, None
+                            else:
+                                # If we don't have enough non-zero values, return the data without percentage change
+                                return tables, production_col, date_col, stats_df, None, "Not enough non-zero production values to calculate percentage change"
+                        except Exception as e:
+                            logger.error(f"Error analyzing production trend: {e}")
+                            return tables, production_col, date_col, stats_df, None, f"Error analyzing production trend: {e}"
                     else:
-                        return tables, production_col, None, stats_df, None, "Not enough data points to calculate trend"
+                        return tables, production_col, date_col, stats_df, None, "Not enough data points to analyze trend"
                 else:
                     return tables, None, None, None, None, "Could not identify crude oil production column for analysis"
             else:

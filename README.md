@@ -1,108 +1,163 @@
 # Lease Drop - Crude Oil Inquiry Application
 
-A Streamlit-based web application designed to retrieve and analyze lease drop data from the Texas Comptroller's website, focusing on crude oil production for specific leases.
+A containerized REST API solution for retrieving and analyzing lease drop data from the Texas Comptroller's website, designed for integration with Ignition Maker.
 
 ## Features
 
-- **User-friendly Interface**: Input lease numbers or drilling permit numbers along with time periods
+- **Dockerized Solution**: Fully containerized application with all dependencies included
+- **REST API**: Flask-based API for easy integration with Ignition Maker
 - **Robust Web Scraping**: Navigate the Texas Comptroller website with reliable form element detection
-- **Data Visualization**: View production data with summary statistics and charts
-- **AI Assistant**: Gemini-powered chatbot to help analyze and understand lease data
+- **Data Processing**: Extract and analyze production data with summary statistics
+- **Persistent Storage**: Database storage for query results and historical data
 - **Error Handling**: Comprehensive logging and debugging capabilities
+
+## Architecture
+
+The application has been transformed from a Streamlit-based web app to a Docker-containerized REST API solution:
+
+1. **Docker Container**: Based on the official Selenium Chrome Node image with Python 3 support
+2. **REST API**: Flask server exposing endpoints for lease data retrieval and analysis
+3. **Database**: SQLite database for persistent storage of query results
+4. **Web Scraping**: Selenium WebDriver for reliable interaction with the Texas Comptroller's website
+5. **Ignition Integration**: Python client for calling the REST API from Ignition Maker
 
 ## Requirements
 
-- Python 3.9+
-- Streamlit
-- Selenium
-- pandas
-- lxml
-- Google Chrome (for Selenium WebDriver)
-- Google Generative AI (for Gemini AI Assistant)
+- Docker and Docker Compose
+- Ignition Maker (for UI integration)
 
 ## Installation
 
-### Using Docker (Recommended)
+### Using Docker Compose (Recommended)
 
-1. Build the Docker image:
-
-   ```bash
-   docker build -t cong-app .
-   ```
-
-2. Run the container:
+1. Build and start the Docker container:
 
    ```bash
-   docker run --rm -p 8502:8502 -v "$(pwd)/screenshots:/app/screenshots" -e GEMINI_API_KEY=your_api_key_here cong-app
+   docker compose up -d
    ```
 
-3. Access the application at http://localhost:8502
+2. The REST API will be available at http://localhost:5000
 
-### Manual Installation
+### Manual Installation (Development Only)
 
 1. Install dependencies:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r ignition_requirements.txt
+   pip install flask
    ```
 
-2. Install Chrome WebDriver (compatible with your Chrome version)
+2. Install Chrome and ChromeDriver (compatible with your Chrome version)
 
-3. Set your Gemini API key:
+3. Run the REST API server:
 
    ```bash
-   # Option 1: Use the provided script
-   ./set_api_key.sh your_api_key_here
-   
-   # Option 2: Set environment variable manually
-   export GEMINI_API_KEY=your_api_key_here
-   streamlit run app.py
+   python rest_api.py
    ```
 
-4. Run the application:
+## API Endpoints
 
-   ```bash
-   streamlit run app.py
-   ```
+- **GET /health**: Check if the API is running
+- **POST /api/retrieve_data**: Retrieve lease drop data
+  - Parameters:
+    - identifier_type: "Lease Number" or "Drilling Permit Number"
+    - identifier_value: The value of the identifier
+    - beg_period: Beginning period in yymm or yy format
+    - end_period: Ending period in yymm or yy format
+- **GET /api/history**: Get historical queries
+- **GET /api/query/{query_id}**: Get details for a specific query
 
-## Usage
+## API Usage
 
-1. Enter either a Lease Number (6 digits) OR a Drilling Permit Number (6 digits)
-2. Specify Begin Period and End Period in yymm or yy format
-3. Click "Get Lease Drop Data"
-4. View the retrieved data, summary statistics, and visualizations
-5. Switch to the "AI Assistant" tab to ask questions about your lease data
+The REST API provides the following endpoints:
 
-## AI Assistant
+- `/health` - Health check endpoint
+- `/api/retrieve_data` - Retrieve lease drop data
 
-The application includes a Gemini-powered AI assistant that can:
+### Example API Request
 
-- Answer questions about your retrieved lease data
-- Provide insights and analysis on production trends
-- Explain terminology and concepts related to oil leases
-- Help interpret the data in natural language
+```json
+{
+  "identifier_type": "Lease Number",
+  "identifier_value": "011457",
+  "beg_period": "1601",
+  "end_period": "2001"
+}
+```
 
-To use the AI Assistant:
+### Example API Response
 
-1. First retrieve lease data in the "Data Retrieval" tab
-2. Switch to the "AI Assistant" tab
-3. Ask questions about your data in natural language
+```json
+{
+  "status": "success",
+  "query_info": {
+    "timestamp": "2025-04-20T04:14:31.303140",
+    "identifier_type": "Lease Number",
+    "identifier_value": "011457",
+    "beg_period": "1601",
+    "end_period": "2001",
+    "status": "success"
+  },
+  "production_column": "Gross Barrels",
+  "date_column": "Period",
+  "percentage_change": 7614.62,
+  "statistics": [
+    {
+      "Statistic": "Count",
+      "Value": 54.0
+    },
+    {
+      "Statistic": "Mean",
+      "Value": 22912.81
+    },
+    {
+      "Statistic": "Median",
+      "Value": 9768.5
+    },
+    {
+      "Statistic": "Min",
+      "Value": 0.0
+    },
+    {
+      "Statistic": "Max",
+      "Value": 203514.0
+    },
+    {
+      "Statistic": "Std Dev",
+      "Value": 41465.53
+    }
+  ]
+}
+```
 
-You'll need a Gemini API key from [Google AI Studio](https://ai.google.dev/) to use this feature.
+## Testing
+
+Use the provided test script to verify the API functionality:
+
+```bash
+python test_api.py
+```
+
+## Ignition Integration
+
+The `ignition_rest_client.py` script provides methods for calling the REST API from Ignition Maker:
+
+1. Import the script into your Ignition project
+2. Use the provided functions to retrieve and process lease data
+3. Display the results in your Ignition UI
 
 ## Troubleshooting
 
-If you encounter issues with the web scraping:
+If you encounter issues with the Docker container:
 
-1. Check the screenshots directory for debug information
-2. Ensure you have a stable internet connection
+1. Check the container logs:
+   ```bash
+   docker compose logs
+   ```
+
+2. Ensure the container has access to the internet for web scraping
+
 3. Verify that your input parameters are correctly formatted
-
-If the AI Assistant is not working:
-
-1. Make sure you've set your Gemini API key correctly
-2. Retrieve lease data before using the AI Assistant
-3. Check your internet connection as the AI requires API calls
 
 ## License
 

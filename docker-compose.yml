@@ -1,0 +1,15 @@
+services:
+  lease-drop-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.ignition
+    image: lease-drop-api
+    container_name: lease-drop-api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    environment:
+      - PORT=5000
+      - PYTHONUNBUFFERED=1
